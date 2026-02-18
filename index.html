@@ -657,8 +657,7 @@
     <script>
         
         // --- GOOGLE SHEET CSV URL ---
-        const SHEET_BASE_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vShE116l54ijfP1yQXXXgjnpK0ApBAhECrvztVYaTZF2-aH35tI-vl2S4VwB7XPpM5vgvL_-74U15xl/pub?gid=333041365&single=true&output=csv";
-        const SHEET_CSV_URL = `https://api.allorigins.win/raw?url=${encodeURIComponent(SHEET_BASE_URL)}&_=${Date.now()}`;
+        const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vShE116l54ijfP1yQXXXgjnpK0ApBAhECrvztVYaTZF2-aH35tI-vl2S4VwB7XPpM5vgvL_-74U15xl/pub?gid=333041365&single=true&output=csv&_=${Date.now()}`;
 
         let localData = [];
 
@@ -754,33 +753,22 @@
                 </tr>`;
 
             try {
-                const SHEET_BASE_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vShE116l54ijfP1yQXXXgjnpK0ApBAhECrvztVYaTZF2-aH35tI-vl2S4VwB7XPpM5vgvL_-74U15xl/pub?gid=333041365&single=true&output=csv";
-                const SHEET_CSV_URL = `https://corsproxy.io/?${encodeURIComponent(SHEET_BASE_URL)}`;
+                const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vShE116l54ijfP1yQXXXgjnpK0ApBAhECrvztVYaTZF2-aH35tI-vl2S4VwB7XPpM5vgvL_-74U15xl/pub?gid=333041365&single=true&output=csv&_=${Date.now()}`;
 
-                console.log("Fetching:", SHEET_CSV_URL);
                 const response = await fetch(SHEET_CSV_URL);
-                console.log("Response status:", response.status);
-                console.log("Response ok:", response.ok);
-
                 if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
-                
-                const csvText = await response.text();
-                console.log("Raw CSV (first 500 chars):", csvText.substring(0, 500));
-                console.log("Number of lines:", csvText.trim().split("\n").length);
 
+                const csvText = await response.text();
                 localData = parseCSV(csvText);
-                console.log("Parsed rows:", localData.length);
-                console.log("First row:", localData[0]);
 
                 if (localData.length === 0) throw new Error("No data rows found in sheet.");
 
             } catch (err) {
-                console.error("Full error:", err);
                 document.getElementById('tableBody').innerHTML = `
                     <tr>
                         <td colspan="9" class="p-12 text-center text-red-400">
                             <i class="fa-solid fa-triangle-exclamation text-2xl mb-3 block"></i>
-                            Failed to load data.<br>
+                            Failed to load data. Make sure the sheet is published publicly.<br>
                             <span class="text-xs text-slate-400 mt-2 block">${err.message}</span>
                         </td>
                     </tr>`;
