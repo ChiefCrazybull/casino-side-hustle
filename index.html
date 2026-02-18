@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweepstakes Side Hustle | The Risk-Free Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Custom scrollbar */
+        .custom-scroll::-webkit-scrollbar { height: 8px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Sortable Header Styles */
+        th.sortable { cursor: pointer; user-select: none; transition: background-color 0.2s; }
+        th.sortable:hover { background-color: #f8fafc; }
+        
+        /* Filter Container Styles */
+        .filter-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .filter-btn:hover {
+            background-color: #4338ca;
+        }
+
+        .filter-dropdown {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px;
+            width: 300px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+        }
+
+        .filter-dropdown.show {
+            display: block;
+        }
+
+        .filter-section {
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .filter-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .filter-section h4 {
+            margin: 0 0 10px 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .filter-section .range-row {
+            margin-top: 6px;
+        }
+
+        .tier-buttons {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .tier-btn {
+            padding: 6px 12px;
+            border: 2px solid #cbd5e1;
+            background-color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.2s;
+            min-width: 44px;
+            text-align: center;
+        }
+
+        .tier-btn.active {
+            background-color: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+
+        .filter-dropdown input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+            margin: 6px 0;
+        }
+
+        .filter-dropdown input[type="checkbox"],
+        .filter-dropdown input[type="radio"] {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .filter-dropdown label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 13px;
+            margin: 6px 0;
+            color: #475569;
+        }
+
+        .range-row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .range-row input[type="range"] {
+            flex: 1;
+            margin: 0;
+        }
+
+        .range-value {
+            font-weight: 600;
+            color: #4f46e5;
+            font-size: 16px;
+            min-width: 40px;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .range-display {
+            font-weight: 600;
+        }
+
+        .streak-toggle {
+            width: 100%;
+        }
+
+        .streak-toggle input {
+            display: none;
+        }
+
+        .streak-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            border-radius: 9999px;
+            background: white;
+            border: 1px solid #e4e6eb;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .streak-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 13px;
+        }
+
+        .streak-left i {
+            color: #9ca3af;
+            font-size: 16px;
+            transition: 0.25s;
+        }
+
+        .switch {
+            width: 46px;
+            height: 24px;
+            background: #d1d5db;
+            border-radius: 999px;
+            position: relative;
+            transition: 0.25s;
+        }
+
+        .knob {
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #f97316;
+        }
+
+        .knob i {
+            opacity: 0;
+            transition: 0.2s ease;
+        }
+
+        .streak-label:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .streak-toggle input:checked + .streak-label {
+            background: #fff7ed;
+            border-color: #fdba74;
+        }
+
+        .streak-toggle input:checked + .streak-label .streak-left i {
+            color: #f97316;
+        }
+
+        .streak-toggle input:checked + .streak-label .switch {
+            background: #fb923c;
+        }
+
+        .streak-toggle input:checked + .streak-label .knob {
+            transform: translateX(22px);
+        }
+
+        .streak-toggle input:checked + .streak-label .knob i {
+            opacity: 1;
+        }
+
+        .timeframe-picker {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: #f5f5f7;
+            border-radius: 9999px;
+            padding: 0px;
+            width: 100%;
+            gap: 4px;
+            margin: 0;
+        }
+
+        .timeframe-picker input[type="radio"] {
+            display: none;
+        }
+
+        .segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 0;
+            border-radius: 9999px;
+            cursor: pointer;
+            color: #555;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            user-select: none;
+        }
+
+        .segment i {
+            font-size: 16px;
+        }
+
+        .timeframe-picker input[type="radio"]:checked + .segment {
+            background: #5865F2;
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .timeframe-picker input[type="radio"]:not(:checked) + .segment:hover {
+            background: #e9e9ee;
+        }
+
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
+                    It's not Gambling. <span class="text-indigo-600">It's Churning.</span>
+                </h1>
+                <p class="text-lg text-slate-600 mb-8 leading-relaxed max-w-2xl mx-auto">
+                    Social casinos provide an almost risk-free way to make money if you are disciplined. 
+                    Treat it as a business, not a game.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+                    <div class="p-6 bg-slate-100 rounded-xl border border-slate-200">
+                        <p class="text-sm text-slate-500 uppercase font-bold">Weekly Potential</p>
+                        <p class="text-3xl font-bold text-slate-900">$175+</p>
+                        <p class="text-xs text-slate-500">Just 15 mins/day</p>
+                    </div>
+                    <div class="p-6 bg-indigo-50 rounded-xl border border-indigo-100">
+                        <p class="text-sm text-indigo-500 uppercase font-bold">Monthly Potential</p>
+                        <p class="text-3xl font-bold text-indigo-700">$750+</p>
+                        <p class="text-xs text-indigo-600">Including Promos</p>
+                    </div>
+                    <div class="p-6 bg-slate-100 rounded-xl border border-slate-200">
+                        <p class="text-sm text-slate-500 uppercase font-bold">Yearly Potential</p>
+                        <p class="text-3xl font-bold text-slate-900">$10,000</p>
+                        <p class="text-xs text-slate-500">Consistent Effort</p>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border-l-4 border-amber-400 p-4 text-left rounded-r-md text-sm text-amber-900">
+                    <p class="font-bold mb-1"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Transparency Note</p>
+                    <p>There are many sites doing this. You don't <i>have</i> to use my links below, and you can succeed without them. However, using them gives me a small referral bonus which supports this guide. Thank you!</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-[80%] mx-auto pt-6 pb-8">
+        <!-- Toolbar Row -->
+        <div class="mb-6 flex items-center gap-4">
+            <h2 class="text-3xl font-extrabold text-slate-800 whitespace-nowrap">
+                Top Casinos to Claim
+            </h2>
+
+            <div class="flex items-center gap-3 ml-auto">
+                <!-- Search Bar -->
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-search text-slate-400"></i>
+                    </div>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Search casinos" 
+                        class="pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent w-64"
+                        oninput="handleSearch()"
+                    >
+                </div>
+                <!-- Filter -->
+                <div class="filter-container">
+                    <button class="filter-btn" onclick="toggleFilterDropdown()">
+                        <i class="fa-solid fa-filter mr-2"></i>Filter
+                    </button>
+                    
+                    <div class="filter-dropdown" id="filterDropdown">
+                        <!-- Tier Selection -->
+                        <div class="filter-section">
+                            <h4>Tier</h4>
+                            <div class="tier-buttons">
+                                <button class="tier-btn active" onclick="toggleFilterTier('S')" data-tier="S">S</button>
+                                <button class="tier-btn active" onclick="toggleFilterTier('A')" data-tier="A">A</button>
+                                <button class="tier-btn active" onclick="toggleFilterTier('B')" data-tier="B">B</button>
+                            </div>
+                        </div>
+
+                        <!-- Sign Up Bonus Slider -->
+                        <div class="filter-section">
+                            <h4>Sign Up Bonus</h4>
+                            <div class="range-row">
+                                <input type="range" id="signupSlider" min="0" max="15" value="0" step="0.5" 
+                                    oninput="updateFilters()">
+                                <span class="range-value">$<span class="range-display" id="signupDisplay">0</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Daily Avg Slider -->
+                        <div class="filter-section">
+                            <h4>Daily Average</h4>
+                            <div class="range-row">
+                                <input type="range" id="dailyAvgSlider" min="0" max="2" value="0" step="0.1" 
+                                       oninput="updateFilters()">
+                                <span class="range-value">$<span class="range-display" id="dailyAvgDisplay">0</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Streak Checkbox -->
+                        <div class="filter-section">
+                            <div class="streak-toggle">
+                                <input type="checkbox" id="streakCheckbox" onchange="updateFilters()">
+                                <label for="streakCheckbox" class="streak-label">
+                                    <div class="streak-left">
+                                        <i class="fa-solid fa-fire-flame-curved"></i>
+                                        <span>Streak Bonus</span>
+                                    </div>
+                                    <div class="switch">
+                                        <div class="knob">
+                                            <i class="fa-solid fa-fire-flame-curved"></i>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Reset Type -->
+                        <div class="filter-section">
+                            <h4>Reset Time</h4>
+                            <div class="timeframe-picker">
+                                <input type="radio" name="reset" value="any" id="reset-any" checked onchange="updateFilters()">
+                                <label for="reset-any" class="segment">
+                                    <i class="fa-solid fa-infinity"></i>
+                                    <span>Any</span>
+                                </label>
+
+                                <input type="radio" name="reset" value="daily" id="reset-daily" onchange="updateFilters()">
+                                <label for="reset-daily" class="segment">
+                                    <i class="fa-solid fa-sun"></i>
+                                    <span>Daily</span>
+                                </label>
+
+                                <input type="radio" name="reset" value="24h" id="reset-24h" onchange="updateFilters()">
+                                <label for="reset-24h" class="segment">
+                                    <i class="fa-regular fa-clock"></i>
+                                    <span>24h</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Min Redeem Slider -->
+                        <div class="filter-section">
+                            <h4>Minimum Redemption Amount</h4>
+                            <div class="range-row">
+                                <input type="range" id="redeemSlider" min="20" max="150" value="150" step="10" 
+                                       oninput="updateFilters()">
+                                <span class="range-value">$<span class="range-display" id="redeemDisplay">150</span></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-slate-200">
+            <div class="custom-scroll overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[1200px]">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase text-slate-500 font-bold tracking-wider">
+                            <th class="p-4 w-24 text-center sortable" onclick="handleSort('tier')">
+                                Tier <span class="sort-icon ml-1" data-col="tier"><i class="fa-solid fa-sort text-slate-300"></i></span>
+                            </th>
+                            <th class="p-4 w-48 sortable" onclick="handleSort('name')">
+                                Casino Name <span class="sort-icon ml-1" data-col="name"><i class="fa-solid fa-sort text-slate-300"></i></span>
+                            </th>
+                            <th class="p-4 w-32 sortable" onclick="handleSort('signup')">
+                                Sign Up <span class="sort-icon ml-1" data-col="signup"><i class="fa-solid fa-sort text-slate-300"></i></span>
+                            </th>
+                            <th class="p-4 w-32 sortable" onclick="handleSort('daily')">
+                                Daily Avg <span class="sort-icon ml-1" data-col="daily"><i class="fa-solid fa-sort text-slate-300"></i></span>
+                            </th>
+                            <th class="p-4 w-48 sortable" onclick="handleSort('loc')">
+                                Daily Bonus Location <span class="sort-icon ml-1" data-col="loc"><i class="fa-solid fa-sort text-slate-300"></i></span>
+                            </th>
+                            <th class="p-4 w-24 text-center sortable" onclick="handleSort('streak')">
+                                Streak? <span class="sort-icon ml-1" data-col="streak"><i class="fa-solid fa-sort text-slate-300"></i></span>
+                            </th>
+                            <th class="p-4 w-24 text-center sortable" onclick="handleSort('time')">
+                                Reset <span class="sort-icon ml-1" data-col="time"><i class="fa-solid fa-sort text-slate-300"></i></span>
+                            </th>
+                            <th class="p-4 w-32 text-right sortable" onclick="handleSort('min')">
+                                Min. Redeem <span class="sort-icon ml-1" data-col="min"><i class="fa-solid fa-sort text-slate-300"></i></span>
+                            </th>
+                            <th class="p-4 w-64">
+                                Notes
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody" class="text-sm text-slate-700 divide-y divide-slate-100">
+                        <!-- Table rows will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="emptyState" class="hidden p-12 text-center text-slate-500">
+                <i class="fa-regular fa-folder-open text-4xl mb-3 text-slate-300"></i>
+                <p>No casinos found matching your filters.</p>
+                <button class="mt-4 text-sm text-indigo-600 hover:text-indigo-800" onclick="resetFilters()">
+                    Reset all filters
+                </button>
+            </div>
+            
+            <div class="bg-slate-50 p-4 border-t border-slate-200 text-xs text-slate-500 flex justify-between items-center">
+                <span id="countDisplay">Loading data...</span>
+                <span id="activeFilters" class="text-indigo-600"></span>
+            </div>
+        </div>
+    </div>
+
+    <section class="bg-slate-900 text-slate-50 py-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-2 text-center">The 10-Step Strategy Guide</h2>
+            <p class="text-slate-400 text-center mb-12">How to turn 15 minutes a day into $10,000 a year.</p>
+
+            <div class="space-y-4" id="guide-container">
+                <!-- Guide sections remain the same as in original -->
+                <div class="bg-slate-800 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold flex justify-between items-center focus:outline-none" onclick="toggleGuide(1)">
+                        <span>1. The Mindset</span>
+                        <i class="fa-solid fa-chevron-down text-slate-500 transition-transform" id="icon-1"></i>
+                    </button>
+                    <div id="content-1" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>This is <strong>not gambling</strong>. This is an income system built around how sweepstakes casinos are legally structured.</li>
+                            <li>Casinos give away free Sweeps Cash daily and offer extremely favorable promos to attract users.</li>
+                            <li>Your job is to treat this like a business: <strong>only play when required to churn</strong> and always choose the lowest-risk methods.</li>
+                            <li>If you stay disciplined, earning <strong>$7,000–$10,000 per year</strong> is very realistic.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-slate-800 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold flex justify-between items-center focus:outline-none" onclick="toggleGuide(2)">
+                        <span>2. Setup & Verification</span>
+                        <i class="fa-solid fa-chevron-down text-slate-500 transition-transform" id="icon-2"></i>
+                    </button>
+                    <div id="content-2" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Create a dedicated Gmail:</strong> Keep casino spam away from your main email.</li>
+                            <li><strong>Verify Immediately:</strong> Spend the initial 2 hours verifying your ID on all sites. Do not wait until you want to withdraw; do it now to ensure you are eligible.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold flex justify-between items-center focus:outline-none" onclick="toggleGuide(3)">
+                        <span>3. Understanding Currencies</span>
+                        <i class="fa-solid fa-chevron-down text-slate-500 transition-transform" id="icon-3"></i>
+                    </button>
+                    <div id="content-3" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>SC (Sweeps Cash)</strong> functions exactly like real dollars. This is what we collect and redeem.</li>
+                            <li><strong>GC / Gold Coins / Play Coins</strong> are worthless and only exist for legal compliance.</li>
+                            <li>Ignore all non-SC currencies completely.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold flex justify-between items-center focus:outline-none" onclick="toggleGuide(4)">
+                        <span>4. Intro Promos</span>
+                        <i class="fa-solid fa-chevron-down text-slate-500 transition-transform" id="icon-4"></i>
+                    </button>
+                    <div id="content-4" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Intro promos are usually the <strong>best deals</strong> you will receive.</li>
+                            <li>Some allow you to churn and withdraw profit on the same day.</li>
+                            <li>Most do not expire immediately, so no rush unless a timer is stated.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold flex justify-between items-center focus:outline-none" onclick="toggleGuide(5)">
+                        <span>5. Other Promos</span>
+                        <i class="fa-solid fa-chevron-down text-slate-500 transition-transform" id="icon-5"></i>
+                    </button>
+                    <div id="content-5" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Target promos giving <strong>$25–$30 in bonus SC</strong>.</li>
+                            <li>Apply the <strong>1x playthrough rule</strong> and assume ~90% effective return after churning.</li>
+                            <li>Check if the promo helps reach the <strong>redemption minimum</strong> faster.</li>
+                            <li>Seasonal and holiday promos can be particularly strong.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold flex justify-between items-center focus:outline-none" onclick="toggleGuide(6)">
+                        <span>6. Daily Bonuses</span>
+                        <i class="fa-solid fa-chevron-down text-slate-500 transition-transform" id="icon-6"></i>
+                    </button>
+                    <div id="content-6" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Bookmark every casino and claim bonuses in the <strong>same order daily</strong>.</li>
+                            <li>Set a 24-hour timer to time resets and maintain streaks.</li>
+                            <li>Prioritize casinos with streak bonuses if short on time.</li>
+                            <li>When efficient, this can take 10–20 minutes and earn close to <strong>$20/day</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold flex justify-between items-center focus:outline-none" onclick="toggleGuide(7)">
+                        <span>7. Other Bonuses</span>
+                        <i class="fa-solid fa-chevron-down text-slate-500 transition-transform" id="icon-7"></i>
+                    </button>
+                    <div id="content-7" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Check your casino email daily for free SC, spins, and extra promos.</li>
+                            <li>Follow CrownCoins, Real Prize, Modo, Pulsz, LoneStar, and WOW Vegas on social media.</li>
+                            <li>These accounts often give extra SC through posts and stories.</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="bg-slate-800 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold flex justify-between items-center focus:outline-none" onclick="toggleGuide(8)">
+                        <span>8. The Art of Churning</span>
+                        <i class="fa-solid fa-chevron-down text-slate-500 transition-transform" id="icon-8"></i>
+                    </button>
+                    <div id="content-8" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>All SC must be played through once</strong> before redeeming.</li>
+                            <li>Your goal is to minimize volatility and preserve your balance.</li>
+                            <li><strong>Blackjack (99.5% RTP)</strong> is best — use basic strategy.</li>
+                            <li>If blackjack isn’t available, use <strong>Joker's Jewels</strong> or <strong>Epic Joker</strong> at minimum bet with autoplay.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                 <div class="bg-slate-800 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold flex justify-between items-center focus:outline-none" onclick="toggleGuide(9)">
+                        <span>9. Redeeming Strategy</span>
+                        <i class="fa-solid fa-chevron-down text-slate-500 transition-transform" id="icon-9"></i>
+                    </button>
+                    <div id="content-9" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>You must be above the redemption minimum and have completed 1x playthrough.</li>
+                            <li>Wait 24–48 hours before redeeming after reaching the limit.</li>
+                            <li>Casinos often send strong promos when they think you stopped playing.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                 <div class="bg-slate-800 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left font-bold flex justify-between items-center focus:outline-none" onclick="toggleGuide(10)">
+                        <span>10. Location Restrictions</span>
+                        <i class="fa-solid fa-chevron-down text-slate-500 transition-transform" id="icon-10"></i>
+                    </button>
+                    <div id="content-10" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>This method works for US residents.</li>
+                            <li>Most casinos exclude Idaho, Michigan, Nevada, and Washington (varies by site).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 text-slate-600 py-8 text-center text-sm">
+        <p>&copy; 2026 Sweeps Hustle. Not financial advice. Play responsibly.</p>
+    </footer>
+
+    <script>
+        
+        // --- GOOGLE SHEET CSV URL ---
+        const SHEET_BASE_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vShE116l54ijfP1yQXXXgjnpK0ApBAhECrvztVYaTZF2-aH35tI-vl2S4VwB7XPpM5vgvL_-74U15xl/pub?gid=333041365&single=true&output=csv";
+        const SHEET_CSV_URL = `https://api.allorigins.win/raw?url=${encodeURIComponent(SHEET_BASE_URL)}&_=${Date.now()}`;
+
+        let localData = [];
+
+        // --- PARSE CSV ---
+        function parseCSV(text) {
+            const lines = text.trim().split(/\r?\n/); // handles Windows line endings too
+            const headers = [];
+            
+            // Parse header row
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < lines[0].length; i++) {
+                const char = lines[0][i];
+                if (char === '"') { inQuotes = !inQuotes; }
+                else if (char === ',' && !inQuotes) { headers.push(current.trim()); current = ''; }
+                else { current += char; }
+            }
+            headers.push(current.trim());
+            console.log("Headers found:", headers); // helpful for debugging
+
+            // Helper to find column index by partial, case-insensitive name match
+            function col(keyword) {
+                return headers.findIndex(h => h.toLowerCase().includes(keyword.toLowerCase()));
+            }
+
+            // Find each column index by name
+            const iLink    = col('link');
+            const iTier    = col('tier');
+            const iName    = col('casino name');
+            const iSignup  = col('signup');
+            const iDaily   = col('daily');
+            const iLoc     = col('location');
+            const iStreak  = col('streak');
+            const iTime    = col('time');
+            const iMin     = col('redemption');
+            const iNote    = col('note');
+
+            console.log("Column indices:", { iTier, iName, iSignup, iDaily, iLoc, iStreak, iTime, iMin, iNote });
+
+            return lines.slice(1).map(line => {
+                // Parse each row respecting quoted fields
+                const cols = [];
+                let cur = '';
+                let inQ = false;
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"') { inQ = !inQ; }
+                    else if (char === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+                    else { cur += char; }
+                }
+                cols.push(cur.trim());
+
+                function parseMoney(val) {
+                    return parseFloat((val || '').replace(/[$,\s]/g, '')) || 0;
+                }
+                const signup = parseMoney(cols[iSignup]);
+                const daily  = parseMoney(cols[iDaily]);
+                const min    = parseMoney(cols[iMin]);
+                const streakRaw = (cols[iStreak] || '').toLowerCase();
+                const streak = streakRaw === 'yes' || streakRaw === 'true' || streakRaw === '1';
+
+                let name = (cols[iName] || '').trim();
+                let link = (cols[iLink] || '#').trim();
+                const urlMatch = name.match(/https?:\/\/[^\s)]+/);
+                if (urlMatch) {
+                    link = urlMatch[0];
+                    name = name.replace(urlMatch[0], '').replace(/[()]/g, '').trim();
+                }
+
+                return {
+                    tier:   (cols[iTier]  || '').trim(),
+                    name:   name,
+                    link:   link,
+                    signup: signup,
+                    daily:  daily,
+                    loc:    (cols[iLoc]   || '').trim(),
+                    streak: streak,
+                    time:   (cols[iTime]  || '').trim(),
+                    min:    min,
+                    note:   (cols[iNote]  || '').trim(),
+                };
+            }).filter(row => row.tier && row.name);
+        }
+
+        // --- LOAD DATA FROM SHEET THEN INIT ---
+        async function loadAndInit() {
+            document.getElementById('tableBody').innerHTML = `
+                <tr>
+                    <td colspan="9" class="p-12 text-center text-slate-400">
+                        <i class="fa-solid fa-spinner fa-spin text-2xl mb-3 block"></i>
+                        Loading casino data...
+                    </td>
+                </tr>`;
+
+            try {
+                const SHEET_BASE_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vShE116l54ijfP1yQXXXgjnpK0ApBAhECrvztVYaTZF2-aH35tI-vl2S4VwB7XPpM5vgvL_-74U15xl/pub?gid=333041365&single=true&output=csv";
+                const SHEET_CSV_URL = `https://corsproxy.io/?${encodeURIComponent(SHEET_BASE_URL)}`;
+
+                console.log("Fetching:", SHEET_CSV_URL);
+                const response = await fetch(SHEET_CSV_URL);
+                console.log("Response status:", response.status);
+                console.log("Response ok:", response.ok);
+
+                if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+                
+                const csvText = await response.text();
+                console.log("Raw CSV (first 500 chars):", csvText.substring(0, 500));
+                console.log("Number of lines:", csvText.trim().split("\n").length);
+
+                localData = parseCSV(csvText);
+                console.log("Parsed rows:", localData.length);
+                console.log("First row:", localData[0]);
+
+                if (localData.length === 0) throw new Error("No data rows found in sheet.");
+
+            } catch (err) {
+                console.error("Full error:", err);
+                document.getElementById('tableBody').innerHTML = `
+                    <tr>
+                        <td colspan="9" class="p-12 text-center text-red-400">
+                            <i class="fa-solid fa-triangle-exclamation text-2xl mb-3 block"></i>
+                            Failed to load data.<br>
+                            <span class="text-xs text-slate-400 mt-2 block">${err.message}</span>
+                        </td>
+                    </tr>`;
+                return;
+            }
+
+            init();
+        }
+
+        // --- STATE & CONFIG ---
+        let maxSignupBonus = 10;
+        let maxDailyAvg = 2;
+        let maxMinRedeem = 150;
+
+        let state = {
+            search: "",
+            selectedTiers: ['S', 'A', 'B', 'C'], // Start with all tiers selected
+            minSignupBonus: 0,
+            minDailyAvg: 0,
+            maxMinRedeem: 150,
+            hasStreak: false,
+            resetType: 'any',
+            sortColumn: null,
+            sortDirection: 'asc'
+        };
+
+        // --- DOM ELEMENTS ---
+        const tableBody = document.getElementById('tableBody');
+        const emptyState = document.getElementById('emptyState');
+        const countDisplay = document.getElementById('countDisplay');
+        const activeFiltersDisplay = document.getElementById('activeFilters');
+        const filterDropdown = document.getElementById('filterDropdown');
+
+        // --- INIT ---
+        function init() {
+
+            // Compute maxes from actual loaded data
+            maxSignupBonus = Math.max(...localData.map(item => item.signup));
+            maxDailyAvg = Math.max(...localData.map(item => item.daily));
+            maxMinRedeem = Math.max(...localData.map(item => item.min));
+
+            // Dynamically build tier list from actual data
+            const allTiers = [...new Set(localData.map(item => item.tier))].sort();
+            state.selectedTiers = [...allTiers];
+
+            // Reset state maxes to match real data
+            state.maxMinRedeem = maxMinRedeem;
+
+            syncSliderMaxes();
+            buildTierButtons(allTiers);
+            updateFilterUI();
+            renderTable();
+            setupEventListeners();
+        }
+
+        function buildTierButtons(tiers) {
+            const container = document.querySelector('.tier-buttons');
+            container.innerHTML = tiers.map(tier => `
+                <button class="tier-btn active" onclick="toggleFilterTier('${tier}')" data-tier="${tier}">${tier}</button>
+            `).join('');
+        }
+
+        function handleSearch() {
+            state.search = document.getElementById('searchInput').value.trim().toLowerCase();
+            updateFilters();
+        }
+
+        // --- FILTER FUNCTIONS ---
+        function toggleFilterDropdown() {
+            filterDropdown.classList.toggle('show');
+        }
+
+        function toggleFilterTier(tier) {
+            const btn = document.querySelector(`[data-tier="${tier}"]`);
+            btn.classList.toggle('active');
+            
+            if (state.selectedTiers.includes(tier)) {
+                state.selectedTiers = state.selectedTiers.filter(t => t !== tier);
+            } else {
+                state.selectedTiers.push(tier);
+            }
+            updateFilters(); 
+        }
+
+        function updateFilterDisplay(elementId, value) {
+            const displayValue = (elementId === 'redeemDisplay') ? value : formatDisplayValue(Number(value));
+            document.getElementById(elementId).textContent = displayValue;
+            updateFilters();
+        }
+
+        function formatDisplayValue(value) {
+            return Number.isInteger(value) ? value.toString() : value.toFixed(1).replace(/\.0$/, '');
+        }
+
+        function updateFilters() {
+            // Get values from UI
+            state.minSignupBonus = parseFloat(document.getElementById('signupSlider').value);
+            state.minDailyAvg = parseFloat(document.getElementById('dailyAvgSlider').value);
+            state.maxMinRedeem = parseFloat(document.getElementById('redeemSlider').value);
+            state.hasStreak = document.getElementById('streakCheckbox').checked;
+            state.resetType = document.querySelector('input[name="reset"]:checked').value;
+            
+            // Update display values
+            document.getElementById('signupDisplay').textContent = formatDisplayValue(state.minSignupBonus);
+            document.getElementById('dailyAvgDisplay').textContent = formatDisplayValue(state.minDailyAvg);
+            document.getElementById('redeemDisplay').textContent = state.maxMinRedeem;
+            
+            renderTable(); // This will update the table instantly
+            updateActiveFiltersDisplay();
+        }
+
+        function resetFilters() {
+            // Reset state
+            state.search = "";
+            state.selectedTiers = ['S', 'A', 'B'];
+            state.minSignupBonus = 0;
+            state.minDailyAvg = 0;
+            state.maxMinRedeem = maxMinRedeem;
+            state.hasStreak = false;
+            state.resetType = 'any';
+            state.sortColumn = null;
+            state.sortDirection = 'asc';
+            
+            // Reset UI
+            document.getElementById('searchInput').value = "";
+            document.querySelectorAll('.tier-btn').forEach(btn => btn.classList.add('active'));
+            document.getElementById('signupSlider').value = 0;
+            document.getElementById('dailyAvgSlider').value = 0;
+            document.getElementById('redeemSlider').value = maxMinRedeem;
+            document.getElementById('streakCheckbox').checked = false;
+            document.querySelector('input[name="reset"][value="any"]').checked = true;
+            
+            updateFilterDisplay('signupDisplay', 0);
+            updateFilterDisplay('dailyAvgDisplay', 0);
+            updateFilterDisplay('redeemDisplay', maxMinRedeem);
+            
+            // Update table
+            updateSortIcons();
+            renderTable();
+            updateActiveFiltersDisplay();
+            
+            // Close dropdown if open
+            filterDropdown.classList.remove('show');
+        }
+
+        function updateFilterUI() {
+            document.getElementById('signupDisplay').textContent = formatDisplayValue(state.minSignupBonus);
+            document.getElementById('dailyAvgDisplay').textContent = formatDisplayValue(state.minDailyAvg);
+            document.getElementById('redeemDisplay').textContent = state.maxMinRedeem;
+            
+            document.getElementById('signupSlider').value = state.minSignupBonus;
+            document.getElementById('dailyAvgSlider').value = state.minDailyAvg;
+            document.getElementById('redeemSlider').value = state.maxMinRedeem;
+            document.getElementById('streakCheckbox').checked = state.hasStreak;
+            
+            document.querySelectorAll('.tier-btn').forEach(btn => {
+                const tier = btn.dataset.tier;
+                btn.classList.toggle('active', state.selectedTiers.includes(tier));
+            });
+            
+            document.querySelector(`input[name="reset"][value="${state.resetType}"]`).checked = true;
+        }
+
+        function updateActiveFiltersDisplay() {
+            const activeFilters = [];
+            
+            if (state.search) {
+                activeFilters.push(`Search: "${state.search}"`);
+            }
+
+            if (state.selectedTiers.length < 3) {
+                activeFilters.push(`Tier: ${state.selectedTiers.join(', ')}`);
+            }
+            if (state.minSignupBonus > 0) {
+                activeFilters.push(`Min Signup: $${state.minSignupBonus}`);
+            }
+            if (state.minDailyAvg > 0) {
+                activeFilters.push(`Min Daily: $${state.minDailyAvg}`);
+            }
+            if (state.maxMinRedeem < maxMinRedeem) {
+                activeFilters.push(`Max Redeem: $${state.maxMinRedeem}`);
+            }
+            if (state.hasStreak) {
+                activeFilters.push('Has Streak');
+            }
+            if (state.resetType !== 'any') {
+                activeFilters.push(`Reset: ${state.resetType}`);
+            }
+            
+            activeFiltersDisplay.textContent = activeFilters.length > 0 
+                ? `Active filters: ${activeFilters.join(', ')}`
+                : '';
+        }
+
+        // --- SORTING FUNCTIONS ---
+        function handleSort(column) {
+            if (state.sortColumn === column) {
+                state.sortDirection = state.sortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                state.sortColumn = column;
+                state.sortDirection = 'asc';
+            }
+            renderTable();
+            updateSortIcons();
+        }
+
+        function updateSortIcons() {
+            document.querySelectorAll('.sort-icon').forEach(icon => {
+                icon.innerHTML = '<i class="fa-solid fa-sort text-slate-300"></i>';
+            });
+            if (state.sortColumn) {
+                const activeIcon = document.querySelector(`.sort-icon[data-col="${state.sortColumn}"]`);
+                if (activeIcon) {
+                    activeIcon.innerHTML = state.sortDirection === 'asc' 
+                        ? '<i class="fa-solid fa-arrow-up text-indigo-600"></i>' 
+                        : '<i class="fa-solid fa-arrow-down text-indigo-600"></i>';
+                }
+            }
+        }
+
+        function getSortedData(data) {
+            if (!state.sortColumn) return data;
+            
+            return [...data].sort((a, b) => {
+                let valA = a[state.sortColumn];
+                let valB = b[state.sortColumn];
+                
+                // Handle booleans
+                if (typeof valA === 'boolean') {
+                    valA = valA ? 1 : 0;
+                    valB = valB ? 1 : 0;
+                }
+                
+                // Handle Strings (case insensitive)
+                if (typeof valA === 'string') {
+                    valA = valA.toLowerCase();
+                    valB = valB.toLowerCase();
+                }
+                
+                // Handle numbers
+                if (typeof valA === 'number') {
+                    if (valA < valB) return state.sortDirection === 'asc' ? -1 : 1;
+                    if (valA > valB) return state.sortDirection === 'asc' ? 1 : -1;
+                    return 0;
+                }
+                
+                // Handle strings
+                if (valA < valB) return state.sortDirection === 'asc' ? -1 : 1;
+                if (valA > valB) return state.sortDirection === 'asc' ? 1 : -1;
+                return 0;
+            });
+        }
+
+        // --- RENDER FUNCTIONS ---
+        function renderTable() {
+            // 1. Filter data
+            let filtered = localData.filter(item => {
+                // Search filter
+                if (state.search && !item.name.toLowerCase().includes(state.search)) {
+                    return false;
+                }
+
+                // Tier filter
+                if (!state.selectedTiers.includes(item.tier)) return false;
+                
+                // Signup bonus filter
+                if (item.signup < state.minSignupBonus) return false;
+                
+                // Daily average filter
+                if (item.daily < state.minDailyAvg) return false;
+                
+                // Min redeem filter
+                if (item.min > state.maxMinRedeem) return false;
+                
+                // Streak filter
+                if (state.hasStreak && !item.streak) return false;
+                
+                // Reset time filter
+                if (state.resetType !== 'any' && item.time.toLowerCase() !== state.resetType.toLowerCase()) {
+                    // Handle "24 hrs" vs "24h"
+                    if (state.resetType === '24h' && item.time !== '24 hrs') return false;
+                    if (state.resetType === 'daily' && item.time !== 'Daily') return false;
+                }
+                
+                return true;
+            });
+
+            // 2. Sort data
+            filtered = getSortedData(filtered);
+
+            // 3. Render HTML
+            tableBody.innerHTML = "";
+            
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                countDisplay.textContent = "Showing 0 casinos";
+            } else {
+                emptyState.classList.add('hidden');
+                countDisplay.textContent = `Showing ${filtered.length} casino${filtered.length !== 1 ? 's' : ''}`;
+                
+                filtered.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = "hover:bg-slate-50 transition border-b border-slate-100 group";
+                    
+                    const signupFmt = item.signup > 0 ? `$${item.signup.toFixed(2)}` : "-";
+                    const dailyFmt = item.daily > 0 ? `$${item.daily.toFixed(2)}` : "-";
+                    
+                    row.innerHTML = `
+                        <td class="p-4 text-center">
+                            <span class="${getTierBadgeColor(item.tier)} font-bold px-3 py-1 rounded-md shadow-sm text-xs">${item.tier}</span>
+                        </td>
+                        <td class="p-4 font-semibold text-indigo-600">
+                            <a href="${item.link}" target="_blank" class="hover:underline flex items-center">
+                                ${item.name} <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs opacity-50"></i>
+                            </a>
+                        </td>
+                        <td class="p-4 font-medium text-green-600">${signupFmt}</td>
+                        <td class="p-4 font-bold text-slate-700">${dailyFmt}</td>
+                        <td class="p-4 text-xs text-slate-500">${item.loc}</td>
+                        <td class="p-4 text-center">
+                            ${item.streak 
+                                ? '<i class="fa-solid fa-fire text-orange-500 text-lg" title="Streak Bonus"></i>' 
+                                : '<span class="text-slate-300">-</span>'}
+                        </td>
+                        <td class="p-4 text-center text-xs text-slate-500">${item.time}</td>
+                        <td class="p-4 text-right font-medium text-slate-500">$${item.min}</td>
+                        <td class="p-4 text-xs leading-relaxed text-slate-600 max-w-xs">
+                            ${item.note}
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+            
+            updateActiveFiltersDisplay();
+        }
+
+        // --- UTILITY FUNCTIONS ---
+        function getTierBadgeColor(tier) {
+            if (tier === "S") return "bg-amber-100 text-amber-700 border border-amber-200";
+            if (tier === "A") return "bg-slate-200 text-slate-700 border border-slate-300";
+            return "bg-slate-100 text-slate-500 border border-slate-200";
+        }
+
+        function syncSliderMaxes() {
+            const signupSlider = document.getElementById('signupSlider');
+            const dailyAvgSlider = document.getElementById('dailyAvgSlider');
+            const redeemSlider = document.getElementById('redeemSlider');
+
+            signupSlider.max = maxSignupBonus;
+            dailyAvgSlider.max = maxDailyAvg;
+            redeemSlider.max = maxMinRedeem;
+        }
+
+        function setupEventListeners() {
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!filterDropdown.contains(event.target) && 
+                    !event.target.closest('.filter-btn')) {
+                    filterDropdown.classList.remove('show');
+                }
+            });
+            
+            // Prevent dropdown close when clicking inside
+            filterDropdown.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+        }
+
+        function toggleGuide(id) {
+            const content = document.getElementById(`content-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+            const isHidden = content.classList.contains('hidden');
+            
+            // Close all others
+            document.querySelectorAll('[id^="content-"]').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('[id^="icon-"]').forEach(el => el.classList.remove('rotate-180'));
+            
+            if (isHidden) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        // Start App
+        loadAndInit();
+    </script>
+</body>
+</html>
