@@ -287,6 +287,13 @@
             background: #e9e9ee;
         }
 
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -1085,8 +1092,8 @@
                                 ${item.name} <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs opacity-50"></i>
                             </a>
                         </td>
-                        <td class="p-4 font-medium text-green-600">${signupFmt}</td>
-                        <td class="p-4 font-bold text-slate-700">${dailyFmt}</td>
+                        <td class="p-4 font-medium text-green-600 text-center">${signupFmt}</td>
+                        <td class="p-4 font-bold text-slate-700 text-center">${dailyFmt}</td>
                         <td class="p-4 text-xs text-slate-500">${item.loc}</td>
                         <td class="p-4 text-center">
                             ${item.streak 
@@ -1094,9 +1101,15 @@
                                 : '<span class="text-slate-300">-</span>'}
                         </td>
                         <td class="p-4 text-center text-xs text-slate-500">${item.time}</td>
-                        <td class="p-4 text-right font-medium text-slate-500">$${item.min}</td>
-                        <td class="p-4 text-xs leading-relaxed text-slate-600 max-w-xs">
-                            ${item.note}
+                        <td class="p-4 text-center font-medium text-slate-500">$${item.min}</td>
+                        <td class="p-4 text-xs text-slate-600 max-w-xs">
+                            <div class="notes-cell">
+                                <span class="notes-preview line-clamp-2">${item.note}</span>
+                                <span class="notes-full hidden">${item.note}</span>
+                                <button onclick="toggleNote(this)" class="text-indigo-500 hover:text-indigo-700 font-medium mt-1 block">
+                                    Show more
+                                </button>
+                            </div>
                         </td>
                     `;
                     tableBody.appendChild(row);
@@ -1111,6 +1124,23 @@
             if (tier === "S") return "bg-amber-100 text-amber-700 border border-amber-200";
             if (tier === "A") return "bg-slate-200 text-slate-700 border border-slate-300";
             return "bg-slate-100 text-slate-500 border border-slate-200";
+        }
+
+        function toggleNote(btn) {
+            const cell = btn.closest('.notes-cell');
+            const preview = cell.querySelector('.notes-preview');
+            const full = cell.querySelector('.notes-full');
+            const isExpanded = !full.classList.contains('hidden');
+
+            if (isExpanded) {
+                preview.classList.remove('hidden');
+                full.classList.add('hidden');
+                btn.textContent = 'Show more';
+            } else {
+                preview.classList.add('hidden');
+                full.classList.remove('hidden');
+                btn.textContent = 'Show less';
+            }
         }
 
         function syncSliderMaxes() {
