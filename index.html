@@ -458,16 +458,16 @@
                             <th class="p-4 w-24 text-center sortable" onclick="handleSort('tier')">
                                 Tier <span class="sort-icon ml-1" data-col="tier"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-48 sortable" onclick="handleSort('name')">
+                            <th class="p-4 w-48 text-center sortable" onclick="handleSort('name')">
                                 Casino Name <span class="sort-icon ml-1" data-col="name"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-32 sortable" onclick="handleSort('signup')">
+                            <th class="p-4 w-32 text-center sortable" onclick="handleSort('signup')">
                                 Sign Up <span class="sort-icon ml-1" data-col="signup"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-32 sortable" onclick="handleSort('daily')">
+                            <th class="p-4 w-32 text-center sortable" onclick="handleSort('daily')">
                                 Daily Avg <span class="sort-icon ml-1" data-col="daily"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-48 sortable" onclick="handleSort('loc')">
+                            <th class="p-4 w-48 text-center sortable" onclick="handleSort('loc')">
                                 Daily Bonus Location <span class="sort-icon ml-1" data-col="loc"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
                             <th class="p-4 w-24 text-center sortable" onclick="handleSort('streak')">
@@ -476,10 +476,10 @@
                             <th class="p-4 w-24 text-center sortable" onclick="handleSort('time')">
                                 Reset <span class="sort-icon ml-1" data-col="time"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-32 text-right sortable" onclick="handleSort('min')">
+                            <th class="p-4 w-32 text-center sortable" onclick="handleSort('min')">
                                 Min. Redeem <span class="sort-icon ml-1" data-col="min"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-64">
+                            <th class="p-4 w-64 text-center">
                                 Notes
                             </th>
                         </tr>
@@ -1054,11 +1054,8 @@
                 if (state.hasStreak && !item.streak) return false;
                 
                 // Reset time filter
-                if (state.resetType !== 'any' && item.time.toLowerCase() !== state.resetType.toLowerCase()) {
-                    // Handle "24 hrs" vs "24h"
-                    if (state.resetType === '24h' && item.time !== '24 hrs') return false;
-                    if (state.resetType === 'daily' && item.time !== 'Daily') return false;
-                }
+                if (state.resetType === 'daily' && item.time.toLowerCase() !== 'daily') return false;
+                if (state.resetType === '24h' && !item.time.toLowerCase().includes('24')) return false;
                 
                 return true;
             });
@@ -1092,24 +1089,18 @@
                                 ${item.name} <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs opacity-50"></i>
                             </a>
                         </td>
-                        <td class="p-4 font-medium text-green-600 text-center">${signupFmt}</td>
-                        <td class="p-4 font-bold text-slate-700 text-center">${dailyFmt}</td>
+                        <td class="p-4 font-bold text-slate-900 text-center">${signupFmt}</td>
+                        <td class="p-4 font-bold text-slate-900 text-center">${dailyFmt}</td>
                         <td class="p-4 text-xs text-slate-500">${item.loc}</td>
                         <td class="p-4 text-center">
                             ${item.streak 
                                 ? '<i class="fa-solid fa-fire text-orange-500 text-lg" title="Streak Bonus"></i>' 
                                 : '<span class="text-slate-300">-</span>'}
                         </td>
-                        <td class="p-4 text-center text-xs text-slate-500">${item.time}</td>
-                        <td class="p-4 text-center font-medium text-slate-500">$${item.min}</td>
-                        <td class="p-4 text-xs text-slate-600 max-w-xs">
-                            <div class="notes-cell">
-                                <span class="notes-preview line-clamp-2">${item.note}</span>
-                                <span class="notes-full hidden">${item.note}</span>
-                                <button onclick="toggleNote(this)" class="text-indigo-500 hover:text-indigo-700 font-medium mt-1 block">
-                                    Show more
-                                </button>
-                            </div>
+                        <td class="p-4 text-center font-bold text-slate-900">${item.time}</td>
+                        <td class="p-4 text-center font-bold text-slate-900">$${item.min}</td>
+                        <td class="p-4 text-xs text-slate-600 max-w-xs cursor-pointer select-none" onclick="toggleNote(this)">
+                            <div class="line-clamp-2">${item.note}</div>
                         </td>
                     `;
                     tableBody.appendChild(row);
@@ -1126,21 +1117,9 @@
             return "bg-slate-100 text-slate-500 border border-slate-200";
         }
 
-        function toggleNote(btn) {
-            const cell = btn.closest('.notes-cell');
-            const preview = cell.querySelector('.notes-preview');
-            const full = cell.querySelector('.notes-full');
-            const isExpanded = !full.classList.contains('hidden');
-
-            if (isExpanded) {
-                preview.classList.remove('hidden');
-                full.classList.add('hidden');
-                btn.textContent = 'Show more';
-            } else {
-                preview.classList.add('hidden');
-                full.classList.remove('hidden');
-                btn.textContent = 'Show less';
-            }
+        function toggleNote(td) {
+            const div = td.querySelector('div');
+            div.classList.toggle('line-clamp-2');
         }
 
         function syncSliderMaxes() {
