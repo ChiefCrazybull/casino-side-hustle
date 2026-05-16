@@ -294,6 +294,22 @@
             overflow: hidden;
         }
 
+        #noteTooltip {
+            position: fixed;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 10px 14px;
+            max-width: 280px;
+            font-size: 12px;
+            color: #475569;
+            line-height: 1.6;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            pointer-events: none;
+            z-index: 9999;
+            display: none;
+        }
+
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -301,14 +317,20 @@
     <header class="bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="text-center max-w-4xl mx-auto">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
+
+                <div class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full mb-6 border border-indigo-100">
+                    <i class="fa-solid fa-bullseye"></i>
+                    The Only Profit-First Sweepstakes Guide
+                </div>
+
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-4">
                     It's not Gambling. <span class="text-indigo-600">It's Churning.</span>
                 </h1>
                 <p class="text-lg text-slate-600 mb-8 leading-relaxed max-w-2xl mx-auto">
-                    Social casinos provide a statistically risk-free way to make money, but only if you are disciplined. 
-                    Treat it as a business, not a game.
+                    Every casino here is one I personally claim from daily, ranked by <strong>real daily earnings</strong> and sorted by consistent profit potential.
                 </p>
-                
+
+                <!-- Stats -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
                     <div class="p-6 bg-slate-100 rounded-xl border border-slate-200">
                         <p class="text-sm text-slate-500 uppercase font-bold">Weekly Potential</p>
@@ -327,10 +349,13 @@
                     </div>
                 </div>
 
-                <div class="bg-amber-50 border-l-4 border-amber-400 p-4 text-left rounded-r-md text-sm text-amber-900">
-                    <p class="font-bold mb-1"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Transparency Note</p>
-                    <p>There are many sites doing this. You don't <i>have</i> to use my links below, and you can succeed without them. However, using them gives me a small referral bonus which supports this guide. Thank you!</p>
+                <!-- Transparency -->
+                <div class="border-t border-slate-100 pt-6 text-left">
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        The casino links on this site are referral links — I only earn a commission if you make a purchase, which means I have every reason to be honest about when buying isn't worth it. This system works entirely without spending: free daily bonuses alone generate real, consistent income. Promos can get you there faster, but they're never a requirement. You don't have to use my links at all — the strategy is identical either way, and clicking them is simply a free way to support this site.
+                    </p>
                 </div>
+
             </div>
         </div>
     </header>
@@ -408,6 +433,16 @@
                                         </div>
                                     </div>
                                 </label>
+                            </div>
+                        </div>
+
+                        <!-- Churn Method -->
+                        <div class="filter-section">
+                            <h4>Churn Method</h4>
+                            <div class="tier-buttons">
+                                <button class="tier-btn active" onclick="toggleChurnMethod('fast')" data-churn="fast">Fast BJ / Roulette</button>
+                                <button class="tier-btn active" onclick="toggleChurnMethod('plinko')" data-churn="plinko">Plinko</button>
+                                <button class="tier-btn active" onclick="toggleChurnMethod('slow')" data-churn="slow">Slow BJ Only</button>
                             </div>
                         </div>
 
@@ -650,7 +685,8 @@
                     <div id="content-10" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
                         <ul class="list-disc pl-5 space-y-2">
                             <li>This method works for US residents.</li>
-                            <li>Most casinos exclude Idaho, Michigan, Nevada, and Washington (varies by site).</li>
+                            <li>Most casinos exclude Idaho, Michigan, Nevada, and Washington.</li>
+                            <li>Many casinos also exclude Kentucky, Connecticut, Delaware, Montana, New York, West Virginia, Louisiana, Maryland, New Jersey, California, Tennessee.</li> 
                         </ul>
                     </div>
                 </div>
@@ -702,6 +738,7 @@
             const iTime    = col('time');
             const iMin     = col('redemption');
             const iNote    = col('note');
+            const iChurn   = col('churn');
 
             console.log("Column indices:", { iTier, iName, iSignup, iDaily, iLoc, iStreak, iTime, iMin, iNote });
 
@@ -746,6 +783,7 @@
                     time:   (cols[iTime]  || '').trim(),
                     min:    min,
                     note:   (cols[iNote]  || '').trim(),
+                    churn:  (cols[iChurn] || '').trim(),
                 };
             }).filter(row => row.tier && row.name);
         }
@@ -790,15 +828,19 @@
         let maxSignupBonus = 10;
         let maxDailyAvg = 2;
         let maxMinRedeem = 150;
+        let allTiersGlobal = [];
+
+        const CHURN_METHODS = ['fast', 'plinko', 'slow'];
 
         let state = {
             search: "",
-            selectedTiers: ['S', 'A', 'B', 'C'], // Start with all tiers selected
+            selectedTiers: ['S', 'A', 'B', 'C', 'D'],
             minSignupBonus: 0,
             minDailyAvg: 0,
             maxMinRedeem: 150,
             hasStreak: false,
             resetType: 'any',
+            selectedChurnMethods: [...CHURN_METHODS],
             sortColumn: null,
             sortDirection: 'asc'
         };
@@ -818,8 +860,14 @@
             maxDailyAvg = Math.max(...localData.map(item => item.daily));
             maxMinRedeem = Math.max(...localData.map(item => item.min));
 
-            // Dynamically build tier list from actual data
-            const allTiers = [...new Set(localData.map(item => item.tier))].sort();
+            // Dynamically build tier list from actual data, sorted S→A→B→C→D
+            const tierOrder = ['S', 'A', 'B', 'C', 'D'];
+            const allTiers = [...new Set(localData.map(item => item.tier))]
+                .sort((a, b) => {
+                    const ai = tierOrder.indexOf(a); const bi = tierOrder.indexOf(b);
+                    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+                });
+            allTiersGlobal = allTiers;
             state.selectedTiers = [...allTiers];
 
             // Reset state maxes to match real data
@@ -861,6 +909,17 @@
             updateFilters(); 
         }
 
+        function toggleChurnMethod(method) {
+            const btn = document.querySelector(`[data-churn="${method}"]`);
+            btn.classList.toggle('active');
+            if (state.selectedChurnMethods.includes(method)) {
+                state.selectedChurnMethods = state.selectedChurnMethods.filter(m => m !== method);
+            } else {
+                state.selectedChurnMethods.push(method);
+            }
+            updateFilters();
+        }
+
         function updateFilterDisplay(elementId, value) {
             const displayValue = (elementId === 'redeemDisplay') ? value : formatDisplayValue(Number(value));
             document.getElementById(elementId).textContent = displayValue;
@@ -891,18 +950,20 @@
         function resetFilters() {
             // Reset state
             state.search = "";
-            state.selectedTiers = ['S', 'A', 'B'];
+            state.selectedTiers = [...allTiersGlobal];
             state.minSignupBonus = 0;
             state.minDailyAvg = 0;
             state.maxMinRedeem = maxMinRedeem;
             state.hasStreak = false;
             state.resetType = 'any';
+            state.selectedChurnMethods = [...CHURN_METHODS];
             state.sortColumn = null;
             state.sortDirection = 'asc';
-            
+
             // Reset UI
             document.getElementById('searchInput').value = "";
             document.querySelectorAll('.tier-btn').forEach(btn => btn.classList.add('active'));
+            document.querySelectorAll('[data-churn]').forEach(btn => btn.classList.add('active'));
             document.getElementById('signupSlider').value = 0;
             document.getElementById('dailyAvgSlider').value = 0;
             document.getElementById('redeemSlider').value = maxMinRedeem;
@@ -936,7 +997,11 @@
                 const tier = btn.dataset.tier;
                 btn.classList.toggle('active', state.selectedTiers.includes(tier));
             });
-            
+
+            document.querySelectorAll('[data-churn]').forEach(btn => {
+                btn.classList.toggle('active', state.selectedChurnMethods.includes(btn.dataset.churn));
+            });
+
             document.querySelector(`input[name="reset"][value="${state.resetType}"]`).checked = true;
         }
 
@@ -947,8 +1012,12 @@
                 activeFilters.push(`Search: "${state.search}"`);
             }
 
-            if (state.selectedTiers.length < 3) {
+            if (state.selectedTiers.length < allTiersGlobal.length) {
                 activeFilters.push(`Tier: ${state.selectedTiers.join(', ')}`);
+            }
+            if (state.selectedChurnMethods.length < CHURN_METHODS.length) {
+                const labels = { fast: 'Fast BJ/Roulette', plinko: 'Plinko', slow: 'Slow BJ Only' };
+                activeFilters.push(`Churn: ${state.selectedChurnMethods.map(m => labels[m]).join(', ')}`);
             }
             if (state.minSignupBonus > 0) {
                 activeFilters.push(`Min Signup: $${state.minSignupBonus}`);
@@ -1057,7 +1126,19 @@
                 // Reset time filter
                 if (state.resetType === 'daily' && item.time.toLowerCase() !== 'daily') return false;
                 if (state.resetType === '24h' && !item.time.toLowerCase().includes('24')) return false;
-                
+
+                // Churn method filter
+                if (state.selectedChurnMethods.length < CHURN_METHODS.length) {
+                    const c = item.churn.toLowerCase();
+                    const match = state.selectedChurnMethods.some(method => {
+                        if (method === 'fast') return c.includes('fast') || c.includes('roulette');
+                        if (method === 'plinko') return c.includes('plinko');
+                        if (method === 'slow') return c.includes('slow');
+                        return false;
+                    });
+                    if (!match) return false;
+                }
+
                 return true;
             });
 
@@ -1076,14 +1157,18 @@
                 
                 filtered.forEach(item => {
                     const row = document.createElement('tr');
-                    row.className = "hover:bg-slate-50 transition border-b border-slate-100 group";
-                    
+                    row.className = "hover:bg-slate-50 transition border-b border-slate-100 group cursor-pointer";
+                    row.addEventListener('click', function(e) {
+                        if (e.target.closest('a')) return;
+                        toggleNote(this);
+                    });
+
                     const signupFmt = item.signup > 0 ? `$${item.signup.toFixed(2)}` : "-";
                     const dailyFmt = item.daily > 0 ? `$${item.daily.toFixed(2)}` : "-";
-                    
+
                     row.innerHTML = `
                         <td class="p-4 text-center">
-                            <span class="${getTierBadgeColor(item.tier)} font-bold px-3 py-1 rounded-md shadow-sm text-xs">${item.tier}</span>
+                            <span style="${getTierBadgeStyle(item.tier)}" class="font-bold px-3 py-1 rounded-md shadow-sm text-xs">${item.tier}</span>
                         </td>
                         <td class="p-4 font-semibold text-indigo-600">
                             <a href="${item.link}" target="_blank" class="hover:underline flex items-center">
@@ -1092,15 +1177,19 @@
                         </td>
                         <td class="p-4 font-bold text-slate-900 text-center">${signupFmt}</td>
                         <td class="p-4 font-bold text-slate-900 text-center">${dailyFmt}</td>
-                        <td class="p-4 text-xs text-slate-500">${item.loc}</td>
+                        <td class="p-4 text-xs text-slate-500"><div class="line-clamp-2">${item.loc}</div></td>
                         <td class="p-4 text-center">
-                            ${item.streak 
-                                ? '<i class="fa-solid fa-fire text-orange-500 text-lg" title="Streak Bonus"></i>' 
+                            ${item.streak
+                                ? '<i class="fa-solid fa-fire text-orange-500 text-lg" title="Streak Bonus"></i>'
                                 : '<span class="text-slate-300">-</span>'}
                         </td>
                         <td class="p-4 text-center font-bold text-slate-900">${item.time}</td>
                         <td class="p-4 text-center font-bold text-slate-900">$${item.min}</td>
-                        <td class="p-4 text-xs text-slate-600 max-w-xs cursor-pointer select-none" onclick="toggleNote(this)">
+                        <td class="p-4 text-xs text-slate-600 max-w-xs select-none"
+                            onmouseenter="showNoteTooltip(event, this)"
+                            onmousemove="positionTooltip(event)"
+                            onmouseleave="hideNoteTooltip()"
+                            data-note="${item.note.replace(/"/g, '&quot;')}">
                             <div class="line-clamp-2">${item.note}</div>
                         </td>
                     `;
@@ -1112,15 +1201,23 @@
         }
 
         // --- UTILITY FUNCTIONS ---
-        function getTierBadgeColor(tier) {
-            if (tier === "S") return "bg-amber-100 text-amber-700 border border-amber-200";
-            if (tier === "A") return "bg-slate-200 text-slate-700 border border-slate-300";
-            return "bg-slate-100 text-slate-500 border border-slate-200";
+        function getTierBadgeStyle(tier) {
+            const styles = {
+                'S': 'background-color:#6aa84f;color:#ffffff;',
+                'A': 'background-color:#b6d7a8;color:#2d5a1b;',
+                'B': 'background-color:#d9ead3;color:#2d5a1b;',
+                'C': 'background-color:#fff2cc;color:#7a5f00;',
+                'D': 'background-color:#f6b26b;color:#7a3800;',
+            };
+            return styles[tier] || 'background-color:#f6b26b;color:#7a3800;';
         }
 
-        function toggleNote(td) {
-            const div = td.querySelector('div');
-            div.classList.toggle('line-clamp-2');
+        function toggleNote(row) {
+            const div = row.querySelector('[data-note] div');
+            if (div) {
+                div.classList.toggle('line-clamp-2');
+                hideNoteTooltip();
+            }
         }
 
         function syncSliderMaxes() {
@@ -1161,6 +1258,37 @@
                 content.classList.remove('hidden');
                 icon.classList.add('rotate-180');
             }
+        }
+
+        // --- NOTE TOOLTIP ---
+        const noteTooltip = document.createElement('div');
+        noteTooltip.id = 'noteTooltip';
+        document.body.appendChild(noteTooltip);
+
+        function showNoteTooltip(e, td) {
+            const div = td.querySelector('div');
+            if (!div || !div.classList.contains('line-clamp-2')) return;
+            const text = td.dataset.note;
+            if (!text) return;
+            noteTooltip.textContent = text;
+            noteTooltip.style.display = 'block';
+            positionTooltip(e);
+        }
+
+        function positionTooltip(e) {
+            const offset = 14;
+            let x = e.clientX + offset;
+            let y = e.clientY + offset;
+            const w = noteTooltip.offsetWidth;
+            const h = noteTooltip.offsetHeight;
+            if (x + w > window.innerWidth - 8) x = e.clientX - w - offset;
+            if (y + h > window.innerHeight - 8) y = e.clientY - h - offset;
+            noteTooltip.style.left = x + 'px';
+            noteTooltip.style.top = y + 'px';
+        }
+
+        function hideNoteTooltip() {
+            noteTooltip.style.display = 'none';
         }
 
         // Start App
