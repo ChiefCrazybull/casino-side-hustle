@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sweepstakes Side Hustle | The Risk-Free Guide</title>
+    <title>Daily Dollars | Elite Sweepstakes Guide</title>
+    <link rel="icon" type="image/x-icon" href="dollar-favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="dollar-favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="dollar-favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="dollar-favicon/apple-touch-icon.png">
+    <script>if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')</script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     
@@ -29,7 +35,7 @@
 
         .filter-btn {
             padding: 8px 16px;
-            background-color: #4f46e5;
+            background-color: #6aa84f;
             color: white;
             border: none;
             border-radius: 6px;
@@ -40,7 +46,7 @@
         }
 
         .filter-btn:hover {
-            background-color: #4338ca;
+            background-color: #558042;
         }
 
         .filter-dropdown {
@@ -103,9 +109,9 @@
         }
 
         .tier-btn.active {
-            background-color: #4f46e5;
+            background-color: #6aa84f;
             color: white;
-            border-color: #4f46e5;
+            border-color: #6aa84f;
         }
 
         .filter-dropdown input[type="range"] {
@@ -142,7 +148,7 @@
 
         .range-value {
             font-weight: 600;
-            color: #4f46e5;
+            color: #6aa84f;
             font-size: 16px;
             min-width: 40px;
             text-align: right;
@@ -278,7 +284,7 @@
         }
 
         .timeframe-picker input[type="radio"]:checked + .segment {
-            background: #5865F2;
+            background: #6aa84f;
             color: white;
             box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
@@ -290,6 +296,13 @@
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -310,49 +323,133 @@
             display: none;
         }
 
+        /* ── Dark mode overrides ── */
+        html.dark .custom-scroll::-webkit-scrollbar-track { background: #1e293b; }
+        html.dark .custom-scroll::-webkit-scrollbar-thumb { background: #475569; }
+
+        html.dark th.sortable:hover { background-color: #1e293b; }
+
+        html.dark #tableBody tr { border-color: #334155; }
+        html.dark #tableBody tr:hover { background-color: #1e293b; }
+        html.dark #tableBody .text-indigo-600 { color: #a5b4fc; }
+        html.dark #tableBody .text-slate-900 { color: #f1f5f9; }
+        html.dark #tableBody .text-slate-700 { color: #cbd5e1; }
+        html.dark #tableBody .text-slate-600 { color: #94a3b8; }
+        html.dark #tableBody .text-slate-500 { color: #64748b; }
+        html.dark #tableBody .text-slate-300 { color: #475569; }
+
+        html.dark .filter-dropdown {
+            background-color: #1e293b;
+            border-color: #334155;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        html.dark .filter-section { border-color: #475569; }
+        html.dark .filter-section h4 { color: #e2e8f0; }
+        html.dark .filter-dropdown label { color: #94a3b8; }
+        html.dark .range-value { color: #4ade80; }
+        html.dark .tier-btn { background-color: #334155; border-color: #475569; color: #e2e8f0; }
+        html.dark .tier-btn.active { background-color: #6aa84f; color: white; border-color: #6aa84f; }
+        html.dark .filter-reset-row { border-color: #475569; }
+        html.dark .filter-reset-row button { background-color: #334155; color: #e2e8f0; }
+        html.dark .filter-reset-row button:hover { background-color: #475569; }
+        html.dark .streak-label { background: #334155; border-color: #475569; }
+        html.dark .streak-left { color: #e2e8f0; }
+        html.dark .switch { background: #475569; }
+        html.dark .streak-toggle input:checked + .streak-label { background: #1e293b; border-color: #6aa84f; }
+        html.dark .timeframe-picker { background: #0f172a; }
+        html.dark .segment { color: #94a3b8; }
+        html.dark .timeframe-picker input[type="radio"]:not(:checked) + .segment:hover { background: #334155; }
+
+        html.dark #searchInput {
+            background-color: #1e293b;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+        html.dark #searchInput::placeholder { color: #64748b; }
+
+        html.dark #noteTooltip {
+            background: #1e293b;
+            border-color: #334155;
+            color: #cbd5e1;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+        }
+
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800">
 
-    <header class="bg-white border-b border-slate-200">
+    <nav class="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2.5">
+                <img src="simple-logo.png" alt="Daily Dollars" class="h-8 w-8">
+                <span class="font-extrabold text-lg text-slate-900 dark:text-white tracking-tight">Daily Dollars</span>
+            </a>
+            <button id="darkToggle" onclick="toggleDarkMode()"
+                class="p-2 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800 transition-colors"
+                title="Toggle dark mode">
+                <i id="darkIcon" class="fa-solid fa-moon text-lg"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="text-center max-w-4xl mx-auto">
-
-                <div class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full mb-6 border border-indigo-100">
-                    <i class="fa-solid fa-bullseye"></i>
-                    The Only Profit-First Sweepstakes Guide
-                </div>
-
-                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-4">
-                    It's not Gambling. <span class="text-indigo-600">It's Churning.</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
+                    It's not Gambling. <span class="text-green-700 dark:text-green-400">It's Churning.</span>
                 </h1>
-                <p class="text-lg text-slate-600 mb-8 leading-relaxed max-w-2xl mx-auto">
-                    Every casino here is one I personally claim from daily, ranked by <strong>real daily earnings</strong> and sorted by consistent profit potential.
+                <p class="text-lg text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto">
+                    Every casino listed below is one I personally claim from daily, ranked by
+                    <br><strong>real daily earnings</strong> and <strong>consistent profit potential</strong>.
                 </p>
 
                 <!-- Stats -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-                    <div class="p-6 bg-slate-100 rounded-xl border border-slate-200">
-                        <p class="text-sm text-slate-500 uppercase font-bold">Weekly Potential</p>
-                        <p class="text-3xl font-bold text-slate-900">$175+</p>
-                        <p class="text-xs text-slate-500">Just 15 mins/day</p>
+                    <div class="p-6 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <p class="text-sm text-slate-500 dark:text-slate-400 uppercase font-bold">Weekly Potential</p>
+                        <p class="text-3xl font-bold text-slate-900 dark:text-white">$175+</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Just 15 mins/day</p>
                     </div>
-                    <div class="p-6 bg-indigo-50 rounded-xl border border-indigo-100">
-                        <p class="text-sm text-indigo-500 uppercase font-bold">Monthly Potential</p>
-                        <p class="text-3xl font-bold text-indigo-700">$750+</p>
-                        <p class="text-xs text-indigo-600">Including buying promos</p>
+                    <div class="p-6 bg-green-50 dark:bg-slate-800 rounded-xl border border-green-100 dark:border-slate-700">
+                        <p class="text-sm text-green-600 dark:text-green-400 uppercase font-bold">Monthly Potential</p>
+                        <p class="text-3xl font-bold text-green-800 dark:text-green-300">$750+</p>
+                        <p class="text-xs text-green-700 dark:text-green-400">Including buying promos</p>
                     </div>
-                    <div class="p-6 bg-slate-100 rounded-xl border border-slate-200">
-                        <p class="text-sm text-slate-500 uppercase font-bold">Yearly Potential</p>
-                        <p class="text-3xl font-bold text-slate-900">$10,000</p>
-                        <p class="text-xs text-slate-500">Consistent effort</p>
+                    <div class="p-6 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <p class="text-sm text-slate-500 dark:text-slate-400 uppercase font-bold">Yearly Potential</p>
+                        <p class="text-3xl font-bold text-slate-900 dark:text-white">$10,000</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Consistent effort</p>
+                    </div>
+                </div>
+
+                <!-- Value Pillars -->
+                <div class="mb-3 text-center">
+                    <p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest">The goal is profit. This site prioritizes:</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                    <div class="flex items-center gap-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 shadow-sm">
+                        <i class="fa-solid fa-bolt text-green-600 text-lg"></i>
+                        <span class="font-semibold text-slate-700 dark:text-slate-200 text-sm">High Daily Bonuses</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 shadow-sm">
+                        <i class="fa-solid fa-tags text-green-600 text-lg"></i>
+                        <span class="font-semibold text-slate-700 dark:text-slate-200 text-sm">Profitable Promos</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 shadow-sm">
+                        <i class="fa-solid fa-arrows-spin text-green-600 text-lg"></i>
+                        <span class="font-semibold text-slate-700 dark:text-slate-200 text-sm">Reliable Churn Methods</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 shadow-sm">
+                        <i class="fa-solid fa-shield-halved text-green-600 text-lg"></i>
+                        <span class="font-semibold text-slate-700 dark:text-slate-200 text-sm">Trustworthy Casinos That Pay</span>
                     </div>
                 </div>
 
                 <!-- Transparency -->
-                <div class="border-t border-slate-100 pt-6 text-left">
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        The casino links on this site are referral links — I only earn a commission if you make a purchase, which means I have every reason to be honest about when buying isn't worth it. This system works entirely without spending: free daily bonuses alone generate real, consistent income. Promos can get you there faster, but they're never a requirement. You don't have to use my links at all — the strategy is identical either way, and clicking them is simply a free way to support this site.
+                <div class="bg-green-50 dark:bg-slate-800 border border-green-200 dark:border-slate-700 rounded-xl px-5 py-4 text-left flex gap-3 items-start">
+                    <i class="fa-solid fa-heart text-green-500 mt-1 flex-shrink-0"></i>
+                    <p class="text-base text-green-900 dark:text-slate-300 leading-relaxed">
+                        The casino links on this site are referral links, which is how I earn money from this site. Clicking them costs you nothing, but really helps to support me and this site. You can absolutely do this side hustle without clicking any of my links, but I would very much appreciate it if you used them. Thank you!
                     </p>
                 </div>
 
@@ -362,22 +459,29 @@
 
     <div class="max-w-[80%] mx-auto pt-6 pb-8">
         <!-- Toolbar Row -->
-        <div class="mb-6 flex items-center gap-4">
-            <h2 class="text-3xl font-extrabold text-slate-800 whitespace-nowrap">
-                Top Casinos to Churn
-            </h2>
+        <div class="mb-4 flex items-end gap-4">
+            <!-- pl-4 controls how far right the heading/subheader are indented.
+                 Change to pl-2 (8px), pl-6 (24px), pl-8 (32px), etc. to adjust. -->
+            <div class="pl-9">
+                <h2 class="text-3xl font-extrabold text-slate-800 dark:text-white mb-1">
+                    Top Casinos to Churn
+                </h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400">
+                    <i class="fa-solid fa-circle-check text-green-500 mx-0.5"></i> indicates a casino I've personally redeemed from, but every casino on this list is well-researched and trusted.
+                </p>
+            </div>
 
-            <div class="flex items-center gap-3 ml-auto">
+            <div class="flex items-center gap-3 ml-auto mr-1.5">
                 <!-- Search Bar -->
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i class="fa-solid fa-search text-slate-400"></i>
                     </div>
-                    <input 
-                        type="text" 
-                        id="searchInput" 
-                        placeholder="Search casinos" 
-                        class="pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent w-64"
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search casinos"
+                        class="pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent w-64"
                         oninput="handleSearch()"
                     >
                 </div>
@@ -436,16 +540,6 @@
                             </div>
                         </div>
 
-                        <!-- Churn Method -->
-                        <div class="filter-section">
-                            <h4>Churn Method</h4>
-                            <div class="tier-buttons">
-                                <button class="tier-btn active" onclick="toggleChurnMethod('fast')" data-churn="fast">Fast BJ / Roulette</button>
-                                <button class="tier-btn active" onclick="toggleChurnMethod('plinko')" data-churn="plinko">Plinko</button>
-                                <button class="tier-btn active" onclick="toggleChurnMethod('slow')" data-churn="slow">Slow BJ Only</button>
-                            </div>
-                        </div>
-
                         <!-- Reset Type -->
                         <div class="filter-section">
                             <h4>Reset Time</h4>
@@ -474,10 +568,60 @@
                         <div class="filter-section">
                             <h4>Minimum Redemption Amount</h4>
                             <div class="range-row">
-                                <input type="range" id="redeemSlider" min="20" max="150" value="150" step="10" 
+                                <input type="range" id="redeemSlider" min="0" max="100" value="100" step="5"
                                        oninput="updateFilters()">
-                                <span class="range-value">$<span class="range-display" id="redeemDisplay">150</span></span>
+                                <span class="range-value"><span class="range-display" id="redeemDisplay">Any</span></span>
                             </div>
+                        </div>
+
+                        <!-- Playthrough Filter -->
+                        <div class="filter-section">
+                            <div class="streak-toggle">
+                                <input type="checkbox" id="playthroughCheckbox" onchange="updateFilters()">
+                                <label for="playthroughCheckbox" class="streak-label">
+                                    <div class="streak-left">
+                                        <span>1x Playthrough</span>
+                                    </div>
+                                    <div class="switch">
+                                        <div class="knob">
+                                            <i style="font-style:normal;font-size:9px">1x</i>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Immediate Promo Earning Potential -->
+                        <div class="filter-section">
+                            <h4>Immediate Earning Potential with Promos</h4>
+                            <div class="tier-buttons">
+                                <button class="tier-btn" onclick="togglePromoTier('elite')" data-promo="elite">Elite</button>
+                                <button class="tier-btn" onclick="togglePromoTier('high')" data-promo="high">High</button>
+                                <button class="tier-btn" onclick="togglePromoTier('medium')" data-promo="medium">Medium</button>
+                                <button class="tier-btn" onclick="togglePromoTier('low')" data-promo="low">Low</button>
+                            </div>
+                        </div>
+
+                        <!-- Churn Method -->
+                        <div class="filter-section">
+                            <h4>Churn Method</h4>
+                            <div class="tier-buttons">
+                                <button class="tier-btn" onclick="toggleChurnMethod('fastbj')" data-churn="fastbj">Fast Blackjack</button>
+                                <button class="tier-btn" onclick="toggleChurnMethod('anybj')" data-churn="anybj">Any Blackjack</button>
+                                <button class="tier-btn" onclick="toggleChurnMethod('fastroulette')" data-churn="fastroulette">Fast Roulette</button>
+                                <button class="tier-btn" onclick="toggleChurnMethod('anyroulette')" data-churn="anyroulette">Any Roulette</button>
+                                <button class="tier-btn" onclick="toggleChurnMethod('plinko')" data-churn="plinko">Plinko</button>
+                                <button class="tier-btn" onclick="toggleChurnMethod('poker')" data-churn="poker">Poker</button>
+                                <button class="tier-btn" onclick="toggleChurnMethod('sports')" data-churn="sports">Sports</button>
+                            </div>
+                        </div>
+
+                        <!-- Reset -->
+                        <div class="pt-3 mt-1 border-t border-slate-200 filter-reset-row">
+                            <button onclick="resetFilters()"
+                                class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold text-sm rounded-lg transition-colors">
+                                <i class="fa-solid fa-rotate-left mr-1.5"></i>Reset All Filters
+                            </button>
                         </div>
 
                     </div>
@@ -485,59 +629,107 @@
             </div>
         </div>
 
-        <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-slate-200">
+        <div class="bg-white dark:bg-slate-800 shadow-xl rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
             <div class="custom-scroll overflow-x-auto">
                 <table class="w-full text-left border-collapse min-w-[1200px]">
                     <thead>
-                        <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase text-slate-500 font-bold tracking-wider">
-                            <th class="p-4 w-24 text-center sortable" onclick="handleSort('tier')">
+                        <tr class="bg-slate-50 dark:bg-slate-900 border-b border-slate-100 dark:border-slate-700 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-wider">
+                            <th class="p-2 w-24 text-center sortable" onclick="handleSort('tier')"
+                                data-tip="My personal ranking of the casinos."
+                                onmouseenter="showHeaderTooltip(event, this)"
+                                onmousemove="positionTooltip(event)"
+                                onmouseleave="hideNoteTooltip()">
                                 Tier <span class="sort-icon ml-1" data-col="tier"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-48 text-center sortable" onclick="handleSort('name')">
+                            <th class="p-2 w-48 text-center sortable" onclick="handleSort('name')"
+                                data-tip="Provides my referral link, which supports this page. Clicking is not necessary for you to benefit from this page and side hustle, but also costs you nothing and helps me, so it's greatly appreciated. The green check marks are casinos that I've personally redeemed from."
+                                onmouseenter="showHeaderTooltip(event, this)"
+                                onmousemove="positionTooltip(event)"
+                                onmouseleave="hideNoteTooltip()">
                                 Casino Name <span class="sort-icon ml-1" data-col="name"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-32 text-center sortable" onclick="handleSort('signup')">
+                            <th class="p-2 w-32 text-center sortable" onclick="handleSort('signup')"
+                                data-tip="The bonus given when you sign up for each casino."
+                                onmouseenter="showHeaderTooltip(event, this)"
+                                onmousemove="positionTooltip(event)"
+                                onmouseleave="hideNoteTooltip()">
                                 Sign Up <span class="sort-icon ml-1" data-col="signup"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-32 text-center sortable" onclick="handleSort('daily')">
+                            <th class="p-2 w-32 text-center sortable" onclick="handleSort('daily')"
+                                data-tip="The average amount you can expect to claim from each casino every day. Sometimes part of these daily bonuses comes from giveaways on the casino's social media accounts, which I note in the Notes section."
+                                onmouseenter="showHeaderTooltip(event, this)"
+                                onmousemove="positionTooltip(event)"
+                                onmouseleave="hideNoteTooltip()">
                                 Daily Avg <span class="sort-icon ml-1" data-col="daily"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-48 text-center sortable" onclick="handleSort('loc')">
+                            <th class="p-2 w-48 text-center sortable" onclick="handleSort('loc')"
+                                data-tip="Where you can find and claim the daily bonus on each casino's site."
+                                onmouseenter="showHeaderTooltip(event, this)"
+                                onmousemove="positionTooltip(event)"
+                                onmouseleave="hideNoteTooltip()">
                                 Daily Bonus Location <span class="sort-icon ml-1" data-col="loc"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-24 text-center sortable" onclick="handleSort('streak')">
-                                Streak? <span class="sort-icon ml-1" data-col="streak"><i class="fa-solid fa-sort text-slate-300"></i></span>
+                            <th class="p-2 w-24 text-center sortable" onclick="handleSort('streak')"
+                                data-tip="The flames show casinos with daily bonus streaks, which means that the bonus will get progressively larger the more consecutive days that you claim. If you're short on time one day, prioritize these casinos!"
+                                onmouseenter="showHeaderTooltip(event, this)"
+                                onmousemove="positionTooltip(event)"
+                                onmouseleave="hideNoteTooltip()">
+                                Streak <span class="sort-icon ml-1" data-col="streak"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-24 text-center sortable" onclick="handleSort('time')">
+                            <th class="p-2 w-24 text-center sortable" onclick="handleSort('time')"
+                                data-tip="How often the daily bonus resets. Daily means it resets every calendar day (you could claim a daily bonus in the evening and again the next morning). 24 hrs. means that you must wait at least 24 hours until you can claim another bonus. 8pm means that the bonus resets every night at 8pm."
+                                onmouseenter="showHeaderTooltip(event, this)"
+                                onmousemove="positionTooltip(event)"
+                                onmouseleave="hideNoteTooltip()">
                                 Reset <span class="sort-icon ml-1" data-col="time"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-32 text-center sortable" onclick="handleSort('min')">
+                            <th class="p-2 w-32 text-center sortable" onclick="handleSort('min')"
+                                data-tip="This is the minimum amount that you can cash out from each casino. You will also need to have played through your money on the casino at least once before you are able to redeem."
+                                onmouseenter="showHeaderTooltip(event, this)"
+                                onmousemove="positionTooltip(event)"
+                                onmouseleave="hideNoteTooltip()">
                                 Min. Redeem <span class="sort-icon ml-1" data-col="min"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-4 w-64 text-center">
+                            <th class="p-2 w-24 text-center sortable" onclick="handleSort('playthrough')"
+                                data-tip="Playthrough. This is how many times you must play through your balance before you can redeem. Lower is better, but even higher requirements can be overcome with fast blackjack. If blackjack has a 99% RTP with perfect play, then 5x playthrough gives 0.99⁵ = 95%, which is still a great return given the low volatility of blackjack."
+                                onmouseenter="showHeaderTooltip(event, this)"
+                                onmousemove="positionTooltip(event)"
+                                onmouseleave="hideNoteTooltip()">
+                                Playthru <span class="sort-icon ml-1" data-col="playthrough"><i class="fa-solid fa-sort text-slate-300"></i></span>
+                            </th>
+                            <th class="p-2 w-64 text-center"
+                                data-tip="My thoughts and helpful tips for each casino, based on my experience."
+                                onmouseenter="showHeaderTooltip(event, this)"
+                                onmousemove="positionTooltip(event)"
+                                onmouseleave="hideNoteTooltip()">
                                 Notes
                             </th>
                         </tr>
                     </thead>
-                    <tbody id="tableBody" class="text-sm text-slate-700 divide-y divide-slate-100">
+                    <tbody id="tableBody" class="text-sm text-slate-700 divide-y divide-slate-100 dark:divide-slate-700">
                         <!-- Table rows will be populated by JavaScript -->
                     </tbody>
                 </table>
             </div>
             
-            <div id="emptyState" class="hidden p-12 text-center text-slate-500">
+            <div id="emptyState" class="hidden p-12 text-center text-slate-500 dark:text-slate-400">
                 <i class="fa-regular fa-folder-open text-4xl mb-3 text-slate-300"></i>
                 <p>No casinos found matching your filters.</p>
-                <button class="mt-4 text-sm text-indigo-600 hover:text-indigo-800" onclick="resetFilters()">
+                <button class="mt-4 text-sm text-green-700 hover:text-green-900" onclick="resetFilters()">
                     Reset all filters
                 </button>
             </div>
             
-            <div class="bg-slate-50 p-4 border-t border-slate-200 text-xs text-slate-500 flex justify-between items-center">
+            <div class="bg-slate-50 dark:bg-slate-900 p-4 border-t border-slate-200 dark:border-slate-700 text-xs text-slate-500 dark:text-slate-400 flex justify-between items-center">
                 <span id="countDisplay">Loading data...</span>
-                <span id="activeFilters" class="text-indigo-600"></span>
+                <span id="activeFilters" class="text-green-700"></span>
             </div>
         </div>
+
+        <p class="mt-4 text-sm text-slate-500 dark:text-slate-400 text-center leading-relaxed px-2">
+            <i class="fa-solid fa-circle-info mr-1 text-slate-400"></i>
+            All numbers are based on my own personal experience. Casinos change their offers frequently, and signup promos especially can shift without notice. I have no way of knowing what new users are currently being shown, so if anything in this table doesn't match what you're seeing, please let me know so I can keep it accurate for everyone.
+        </p>
     </div>
 
     <section class="bg-slate-900 text-slate-50 py-16">
@@ -555,9 +747,11 @@
                     <div id="content-1" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
                         <ul class="list-disc pl-5 space-y-2">
                             <li>This is <strong>not gambling</strong>. This is an income system built around how sweepstakes casinos are legally structured.</li>
-                            <li>Casinos give away free Sweeps Cash daily and offer extremely favorable promos to attract users.</li>
+                            <li>Casinos give away free Sweeps Cash daily and offer highly favorable promos to attract users.</li>
                             <li>Your job is to treat this like a business: <strong>only play when required to churn</strong> and always choose the lowest-risk methods.</li>
-                            <li>If you stay disciplined, earning <strong>$7,000–$10,000 per year</strong> is very realistic.</li>
+                            <li>This is a slow, systematic grind, not a get-rich-quick scheme.</li>
+                            <li>If you stay disciplined, earning <strong>$10,000 per year</strong> is very achievable.</li>
+                            <li>However, if you struggle with gambling addiction or impulsive spending, this is not for you.</li>
                         </ul>
                     </div>
                 </div>
@@ -568,8 +762,8 @@
                     </button>
                     <div id="content-2" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
                         <ul class="list-disc pl-5 space-y-2">
-                            <li><strong>Create a dedicated Gmail:</strong> Keep casino spam away from your main email.</li>
-                            <li><strong>Verify Immediately:</strong> Spend the initial 2 hours verifying your ID on all sites. Do not wait until you want to withdraw; do it now to ensure you are eligible.</li>
+                            <li><strong>Create a dedicated email account:</strong> Keep casino spam away from your main email.</li>
+                            <li><strong>Verify your accounts immediately:</strong> Spend an initial 2 hours verifying your ID and completing the KYC (Know Your Customer) requirements on all sites. <strong>Do not wait until you're ready to withdraw</strong>; do it now to ensure you are eligible.</li>
                         </ul>
                     </div>
                 </div>
@@ -581,9 +775,8 @@
                     </button>
                     <div id="content-3" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
                         <ul class="list-disc pl-5 space-y-2">
-                            <li><strong>SC (Sweeps Cash)</strong> functions exactly like real dollars. This is what we collect and redeem.</li>
-                            <li><strong>GC / Gold Coins / Play Coins</strong> are worthless and only exist for legal compliance.</li>
-                            <li>Ignore all non-SC currencies completely.</li>
+                            <li><strong>SC (Sweeps Cash)</strong> functions like real money. This is what we collect and redeem. Some casinos may call it something different, but every casino has an equivalent to SC.</li>
+                            <li><strong>GC (Gold Coins)</strong> are essentially worthless and only exist for legal compliance. They allow you to play games purely for fun, which can be useful for learning how a casino works risk-free.</li>
                         </ul>
                     </div>
                 </div>
@@ -595,25 +788,25 @@
                     </button>
                     <div id="content-4" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
                         <ul class="list-disc pl-5 space-y-2">
-                            <li>Intro promos are usually the <strong>best deals</strong> you will receive.</li>
-                            <li>Some you to churn and withdraw profit on the <strong>same day</strong> (ex. buying 200 SC for $100).</li>
-                            <li>Most do not expire immediately, so no rush unless a timer is stated.</li>
-                            <li>I buy promos when the bonus <strong>exceeds 50%</strong> (ex. paying $20 should give you at least 30 SC).</li>
+                            <li>Intro promos are usually the <strong>best deals</strong> you will ever receive.</li>
+                            <li>Some will allow you to churn and withdraw profit on the <strong>same day</strong> (ex. buying 200 SC for $100).</li>
+                            <li>Most do not expire immediately, so no rush unless a timer is shown.</li>
+                            <li>I typically buy promos when the bonus <strong>is at least 50%</strong> of the purchase price (ex. paying $20 should give you at least 30 SC).</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="bg-slate-800 rounded-lg overflow-hidden">
                     <button class="w-full px-6 py-4 text-left font-bold flex justify-between items-center focus:outline-none" onclick="toggleGuide(5)">
-                        <span>5. Other Promos</span>
+                        <span>5. Standard Promos</span>
                         <i class="fa-solid fa-chevron-down text-slate-500 transition-transform" id="icon-5"></i>
                     </button>
                     <div id="content-5" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
                         <ul class="list-disc pl-5 space-y-2">
-                            <li>Target promos giving <strong>$25–$30 in bonus SC</strong>.</li>
-                            <li>Apply the <strong>1x playthrough rule</strong> and assume ~90% effective return after churning.</li>
-                            <li>Check if the promo helps reach the <strong>redemption minimum</strong> faster.</li>
-                            <li>Seasonal and holiday promos can be particularly strong.</li>
+                            <li>As with intro promos, target promos that give at least <strong>50% extra in bonus SC</strong> (ex. paying $20 should give you at least 30 SC).</li>
+                            <li>Assume a conservative ~90% return after churning when calculating expected profits (ex. if you receive 50 SC, only expect about 45 SC to remain after playthrough).</li>
+                            <li>Check if the promo will put your SC balance above the <strong>redemption minimum</strong>.</li>
+                            <li>Seasonal and holiday promos are often especially strong.</li>
                         </ul>
                     </div>
                 </div>
@@ -626,9 +819,9 @@
                     <div id="content-6" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
                         <ul class="list-disc pl-5 space-y-2">
                             <li>Bookmark every casino and claim bonuses in the <strong>same order daily</strong>.</li>
-                            <li>Set a 24-hour timer to time resets and maintain streaks.</li>
-                            <li>Prioritize casinos with streak bonuses if short on time.</li>
-                            <li>When efficient, this can take 10–20 minutes and earn close to <strong>$20/day</strong>.</li>
+                            <li>Set a 24-hour timer to track reset times and maintain streaks.</li>
+                            <li>Prioritize casinos with <strong>streak bonuses</strong> when you are short on time.</li>
+                            <li>Once you're efficient, this should take 15 minutes and earn <strong>$20/day</strong>.</li>
                         </ul>
                     </div>
                 </div>
@@ -640,9 +833,10 @@
                     </button>
                     <div id="content-7" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
                         <ul class="list-disc pl-5 space-y-2">
-                            <li>Check your casino email daily for free SC, spins, and extra promos.</li>
-                            <li>Follow CrownCoins, Real Prize, Modo, Pulsz, LoneStar, and WOW Vegas on social media.</li>
-                            <li>These accounts often give extra SC through posts and stories.</li>
+                            <li>Check your casino email daily for <strong>free SC, free spins, and extra promos</strong>.</li>
+                            <li>Follow CrownCoins, LoneStar, Real Prize, Modo, Pulsz, and WOW Vegas on Facebook, Instagram, Discord, and TikTok.</li>
+                            <li>Many of these accounts give <strong>extra SC every day</strong> through posts, stories, and emails.</li>
+                            <li>Alternatively, follow <a href=”https://www.reddit.com/r/DailyCashList/” target=”_blank” rel=”noopener noreferrer” class=”text-green-400 hover:text-green-300 underline font-semibold”>Reddit r/DailyCashList</a> and check the “Today's Free SC Bonuses” section at the top of the page for daily social media freebies. This is the only site that will direct you elsewhere, because the focus of this site is always maximizing profit.</li>
                         </ul>
                     </div>
                 </div>
@@ -655,10 +849,12 @@
                     </button>
                     <div id="content-8" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
                         <ul class="list-disc pl-5 space-y-2">
-                            <li><strong>All SC must be played through once</strong> before redeeming.</li>
+                            <li><strong>All SC must be played through once</strong> before redeeming (the playthrough requirement is rarely higher than 1x, and all playthrough requirements are shown in the Playthrough column).</li>
                             <li>Your goal is to minimize volatility and preserve your balance.</li>
-                            <li><strong>Blackjack (99.5% RTP)</strong> is best — use basic strategy.</li>
-                            <li>If blackjack isn’t available, use <strong>Joker's Jewels</strong> or <strong>Epic Joker</strong> at minimum bet with autoplay.</li>
+                            <li><strong>Blackjack (99% RTP)</strong> is best. Just use basic strategy (there are plenty of one-page blackjack guides available online).</li>
+                            <li>If blackjack isn’t available, use <strong>roulette</strong> or <strong>plinko</strong>, as both also offer high RTP and relatively low volatility.</li>
+                            <li>If you need to use slots, always spin at the <strong>lowest SC amount</strong> to reduce volatility.</li>
+                            <li>Remember that even with optimal strategy, short-term losses and variance are normal. However, with disciplined play, long-term profit is guaranteed.</li>
                         </ul>
                     </div>
                 </div>
@@ -670,9 +866,10 @@
                     </button>
                     <div id="content-9" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
                         <ul class="list-disc pl-5 space-y-2">
-                            <li>You must be above the redemption minimum and have completed 1x playthrough.</li>
-                            <li>Wait 24–48 hours before redeeming after reaching the limit.</li>
-                            <li>Casinos often send strong promos when they think you stopped playing.</li>
+                            <li>You must meet the <strong>redemption minimum</strong> and complete <strong>1x playthrough</strong> before redeeming your SC for a cash prize or gift card.</li>
+                            <li>Wait 24–48 hours to redeem after completing the playthrough requirement, as casinos will sometimes send <strong>strong promos</strong> to encourage you to continue playing.</li>
+                            <li>If you don't need cash now, some gift card options offer an <strong>additional 10–20% bonus</strong> on top of your redemption amount.</li>
+                            <li>Remember to track your deposits, withdrawals, and profits for tax purposes. Some casinos may also issue tax forms depending on your winnings (usually when winnings exceed $600).</li>
                         </ul>
                     </div>
                 </div>
@@ -684,9 +881,9 @@
                     </button>
                     <div id="content-10" class="hidden px-6 pb-6 text-slate-300 leading-relaxed border-t border-slate-700 pt-4">
                         <ul class="list-disc pl-5 space-y-2">
-                            <li>This method works for US residents.</li>
+                            <li>This method only works for <strong>United States residents</strong>.</li>
                             <li>Most casinos exclude Idaho, Michigan, Nevada, and Washington.</li>
-                            <li>Many casinos also exclude Kentucky, Connecticut, Delaware, Montana, New York, West Virginia, Louisiana, Maryland, New Jersey, California, Tennessee.</li> 
+                            <li>Many casinos also exclude Kentucky, Connecticut, Delaware, Montana, New York, West Virginia, Louisiana, Maryland, New Jersey, California, and Tennessee. If you live in one of these states, it's best to check each casino’s eligibility rules before signing up.</li> 
                         </ul>
                     </div>
                 </div>
@@ -695,7 +892,11 @@
     </section>
 
     <footer class="bg-slate-950 text-slate-600 py-8 text-center text-sm">
-        <p>&copy; 2026 Sweeps Hustle. Not financial advice. Play responsibly.</p>
+        <div class="flex items-center justify-center gap-2 mb-3">
+            <img src="simple-logo.png" alt="Daily Dollars" class="h-7 w-7">
+            <span class="text-slate-300 font-bold text-base tracking-wide">Daily Dollars</span>
+        </div>
+        <p>&copy; 2026 Daily Dollars. Not financial advice. Play responsibly.</p>
     </footer>
 
     <script>
@@ -728,17 +929,20 @@
             }
 
             // Find each column index by name
-            const iLink    = col('link');
-            const iTier    = col('tier');
-            const iName    = col('casino name');
-            const iSignup  = col('signup');
-            const iDaily   = col('daily');
-            const iLoc     = col('location');
-            const iStreak  = col('streak');
-            const iTime    = col('time');
-            const iMin     = col('redemption');
-            const iNote    = col('note');
-            const iChurn   = col('churn');
+            const iLink     = col('link');
+            const iTier     = col('tier');
+            const iName     = col('casino name');
+            const iSignup   = col('signup');
+            const iDaily    = col('daily');
+            const iLoc      = col('location');
+            const iStreak   = col('streak');
+            const iTime     = col('time');
+            const iMin      = col('redemption');
+            const iNote     = col('note');
+            const iChurn    = col('churn');
+            const iVerified = col('verified');
+            const iPromo        = col('promo earnings');
+            const iPlaythrough  = col('playthrough');
 
             console.log("Column indices:", { iTier, iName, iSignup, iDaily, iLoc, iStreak, iTime, iMin, iNote });
 
@@ -772,18 +976,25 @@
                     name = name.replace(urlMatch[0], '').replace(/[()]/g, '').trim();
                 }
 
+                const verifiedRaw = (cols[iVerified] || '').toLowerCase();
+                const verified = verifiedRaw === 'yes' || verifiedRaw === 'true' || verifiedRaw === '1';
+
                 return {
-                    tier:   (cols[iTier]  || '').trim(),
-                    name:   name,
-                    link:   link,
-                    signup: signup,
-                    daily:  daily,
-                    loc:    (cols[iLoc]   || '').trim(),
-                    streak: streak,
-                    time:   (cols[iTime]  || '').trim(),
-                    min:    min,
-                    note:   (cols[iNote]  || '').trim(),
-                    churn:  (cols[iChurn] || '').trim(),
+                    tier:     (cols[iTier]  || '').trim(),
+                    name:     name,
+                    link:     link,
+                    signup:   signup,
+                    daily:    daily,
+                    loc:      (cols[iLoc]   || '').trim(),
+                    streak:   streak,
+                    time:     (cols[iTime]  || '').trim(),
+                    min:      min,
+                    note:     (cols[iNote]  || '').trim(),
+                    churn:       (cols[iChurn] || '').trim(),
+                    verified:    verified,
+                    promoRaw:    parseMoney(cols[iPromo]),
+                    promoTier:   null,
+                    playthrough: (s => s === '' ? 1 : parseFloat(s))((cols[iPlaythrough] || '').trim()),
                 };
             }).filter(row => row.tier && row.name);
         }
@@ -792,7 +1003,7 @@
         async function loadAndInit() {
             document.getElementById('tableBody').innerHTML = `
                 <tr>
-                    <td colspan="9" class="p-12 text-center text-slate-400">
+                    <td colspan="10" class="p-12 text-center text-slate-400">
                         <i class="fa-solid fa-spinner fa-spin text-2xl mb-3 block"></i>
                         Loading casino data...
                     </td>
@@ -812,7 +1023,7 @@
             } catch (err) {
                 document.getElementById('tableBody').innerHTML = `
                     <tr>
-                        <td colspan="9" class="p-12 text-center text-red-400">
+                        <td colspan="10" class="p-12 text-center text-red-400">
                             <i class="fa-solid fa-triangle-exclamation text-2xl mb-3 block"></i>
                             Failed to load data. Make sure the sheet is published publicly.<br>
                             <span class="text-xs text-slate-400 mt-2 block">${err.message}</span>
@@ -828,9 +1039,10 @@
         let maxSignupBonus = 10;
         let maxDailyAvg = 2;
         let maxMinRedeem = 150;
+        let minMinRedeem = 0;
         let allTiersGlobal = [];
 
-        const CHURN_METHODS = ['fast', 'plinko', 'slow'];
+        const CHURN_METHODS = ['fastbj', 'anybj', 'fastroulette', 'anyroulette', 'plinko', 'poker', 'sports'];
 
         let state = {
             search: "",
@@ -839,8 +1051,10 @@
             minDailyAvg: 0,
             maxMinRedeem: 150,
             hasStreak: false,
+            lowPlaythrough: false,
             resetType: 'any',
-            selectedChurnMethods: [...CHURN_METHODS],
+            selectedChurnMethods: [],
+            selectedPromoTiers: [],
             sortColumn: null,
             sortDirection: 'asc'
         };
@@ -855,10 +1069,24 @@
         // --- INIT ---
         function init() {
 
-            // Compute maxes from actual loaded data
+            // Compute mins/maxes from actual loaded data
             maxSignupBonus = Math.max(...localData.map(item => item.signup));
             maxDailyAvg = Math.max(...localData.map(item => item.daily));
             maxMinRedeem = Math.max(...localData.map(item => item.min));
+            minMinRedeem = Math.min(...localData.filter(item => item.min > 0).map(item => item.min));
+
+            // Assign promo tiers via z-score (normal distribution bucketing)
+            const promoVals = localData.filter(r => r.promoRaw > 0).map(r => r.promoRaw);
+            if (promoVals.length > 1) {
+                const mean = promoVals.reduce((a, b) => a + b, 0) / promoVals.length;
+                const std = Math.sqrt(promoVals.map(v => (v - mean) ** 2).reduce((a, b) => a + b, 0) / promoVals.length);
+                localData.forEach(row => {
+                    if (row.promoRaw > 0) {
+                        const z = std > 0 ? (row.promoRaw - mean) / std : 0;
+                        row.promoTier = z > 1.0 ? 'elite' : z > 0.25 ? 'high' : z > -0.75 ? 'medium' : 'low';
+                    }
+                });
+            }
 
             // Dynamically build tier list from actual data, sorted S→A→B→C→D
             const tierOrder = ['S', 'A', 'B', 'C', 'D'];
@@ -909,6 +1137,17 @@
             updateFilters(); 
         }
 
+        function togglePromoTier(tier) {
+            const btn = document.querySelector(`[data-promo="${tier}"]`);
+            btn.classList.toggle('active');
+            if (state.selectedPromoTiers.includes(tier)) {
+                state.selectedPromoTiers = state.selectedPromoTiers.filter(t => t !== tier);
+            } else {
+                state.selectedPromoTiers.push(tier);
+            }
+            updateFilters();
+        }
+
         function toggleChurnMethod(method) {
             const btn = document.querySelector(`[data-churn="${method}"]`);
             btn.classList.toggle('active');
@@ -921,8 +1160,11 @@
         }
 
         function updateFilterDisplay(elementId, value) {
-            const displayValue = (elementId === 'redeemDisplay') ? value : formatDisplayValue(Number(value));
-            document.getElementById(elementId).textContent = displayValue;
+            if (elementId === 'redeemDisplay') {
+                setRedeemDisplay(value);
+            } else {
+                document.getElementById(elementId).textContent = formatDisplayValue(Number(value));
+            }
             updateFilters();
         }
 
@@ -936,13 +1178,14 @@
             state.minDailyAvg = parseFloat(document.getElementById('dailyAvgSlider').value);
             state.maxMinRedeem = parseFloat(document.getElementById('redeemSlider').value);
             state.hasStreak = document.getElementById('streakCheckbox').checked;
+            state.lowPlaythrough = document.getElementById('playthroughCheckbox').checked;
             state.resetType = document.querySelector('input[name="reset"]:checked').value;
             
             // Update display values
             document.getElementById('signupDisplay').textContent = formatDisplayValue(state.minSignupBonus);
             document.getElementById('dailyAvgDisplay').textContent = formatDisplayValue(state.minDailyAvg);
-            document.getElementById('redeemDisplay').textContent = state.maxMinRedeem;
-            
+            setRedeemDisplay(state.maxMinRedeem);
+
             renderTable(); // This will update the table instantly
             updateActiveFiltersDisplay();
         }
@@ -955,19 +1198,23 @@
             state.minDailyAvg = 0;
             state.maxMinRedeem = maxMinRedeem;
             state.hasStreak = false;
+            state.lowPlaythrough = false;
             state.resetType = 'any';
-            state.selectedChurnMethods = [...CHURN_METHODS];
+            state.selectedChurnMethods = [];
+            state.selectedPromoTiers = [];
             state.sortColumn = null;
             state.sortDirection = 'asc';
 
             // Reset UI
             document.getElementById('searchInput').value = "";
             document.querySelectorAll('.tier-btn').forEach(btn => btn.classList.add('active'));
-            document.querySelectorAll('[data-churn]').forEach(btn => btn.classList.add('active'));
+            document.querySelectorAll('[data-churn]').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('[data-promo]').forEach(btn => btn.classList.remove('active'));
             document.getElementById('signupSlider').value = 0;
             document.getElementById('dailyAvgSlider').value = 0;
             document.getElementById('redeemSlider').value = maxMinRedeem;
             document.getElementById('streakCheckbox').checked = false;
+            document.getElementById('playthroughCheckbox').checked = false;
             document.querySelector('input[name="reset"][value="any"]').checked = true;
             
             updateFilterDisplay('signupDisplay', 0);
@@ -986,12 +1233,13 @@
         function updateFilterUI() {
             document.getElementById('signupDisplay').textContent = formatDisplayValue(state.minSignupBonus);
             document.getElementById('dailyAvgDisplay').textContent = formatDisplayValue(state.minDailyAvg);
-            document.getElementById('redeemDisplay').textContent = state.maxMinRedeem;
-            
+            setRedeemDisplay(state.maxMinRedeem);
+
             document.getElementById('signupSlider').value = state.minSignupBonus;
             document.getElementById('dailyAvgSlider').value = state.minDailyAvg;
             document.getElementById('redeemSlider').value = state.maxMinRedeem;
             document.getElementById('streakCheckbox').checked = state.hasStreak;
+            document.getElementById('playthroughCheckbox').checked = state.lowPlaythrough;
             
             document.querySelectorAll('.tier-btn').forEach(btn => {
                 const tier = btn.dataset.tier;
@@ -1001,6 +1249,10 @@
             document.querySelectorAll('[data-churn]').forEach(btn => {
                 btn.classList.toggle('active', state.selectedChurnMethods.includes(btn.dataset.churn));
             });
+            document.querySelectorAll('[data-promo]').forEach(btn => {
+                btn.classList.toggle('active', state.selectedPromoTiers.includes(btn.dataset.promo));
+            });
+
 
             document.querySelector(`input[name="reset"][value="${state.resetType}"]`).checked = true;
         }
@@ -1015,8 +1267,8 @@
             if (state.selectedTiers.length < allTiersGlobal.length) {
                 activeFilters.push(`Tier: ${state.selectedTiers.join(', ')}`);
             }
-            if (state.selectedChurnMethods.length < CHURN_METHODS.length) {
-                const labels = { fast: 'Fast BJ/Roulette', plinko: 'Plinko', slow: 'Slow BJ Only' };
+            if (state.selectedChurnMethods.length > 0) {
+                const labels = { fastbj: 'Fast Blackjack', anybj: 'Any Blackjack', fastroulette: 'Fast Roulette', anyroulette: 'Any Roulette', plinko: 'Plinko', poker: 'Poker', sports: 'Sports' };
                 activeFilters.push(`Churn: ${state.selectedChurnMethods.map(m => labels[m]).join(', ')}`);
             }
             if (state.minSignupBonus > 0) {
@@ -1025,11 +1277,19 @@
             if (state.minDailyAvg > 0) {
                 activeFilters.push(`Min Daily: $${state.minDailyAvg}`);
             }
-            if (state.maxMinRedeem < maxMinRedeem) {
+            const redeemSliderMax = parseFloat(document.getElementById('redeemSlider').max);
+            if (state.maxMinRedeem < redeemSliderMax) {
                 activeFilters.push(`Max Redeem: $${state.maxMinRedeem}`);
+            }
+            if (state.selectedPromoTiers.length > 0) {
+                const labels = { elite: 'Elite', high: 'High', medium: 'Medium', low: 'Low' };
+                activeFilters.push(`Promo: ${state.selectedPromoTiers.map(t => labels[t]).join(', ')}`);
             }
             if (state.hasStreak) {
                 activeFilters.push('Has Streak');
+            }
+            if (state.lowPlaythrough) {
+                activeFilters.push('Playthrough: 1x or less');
             }
             if (state.resetType !== 'any') {
                 activeFilters.push(`Reset: ${state.resetType}`);
@@ -1043,7 +1303,13 @@
         // --- SORTING FUNCTIONS ---
         function handleSort(column) {
             if (state.sortColumn === column) {
-                state.sortDirection = state.sortDirection === 'asc' ? 'desc' : 'asc';
+                if (state.sortDirection === 'asc') {
+                    state.sortDirection = 'desc';
+                } else {
+                    // third click: back to unsorted
+                    state.sortColumn = null;
+                    state.sortDirection = 'asc';
+                }
             } else {
                 state.sortColumn = column;
                 state.sortDirection = 'asc';
@@ -1059,9 +1325,9 @@
             if (state.sortColumn) {
                 const activeIcon = document.querySelector(`.sort-icon[data-col="${state.sortColumn}"]`);
                 if (activeIcon) {
-                    activeIcon.innerHTML = state.sortDirection === 'asc' 
-                        ? '<i class="fa-solid fa-arrow-up text-indigo-600"></i>' 
-                        : '<i class="fa-solid fa-arrow-down text-indigo-600"></i>';
+                    activeIcon.innerHTML = state.sortDirection === 'asc'
+                        ? '<i class="fa-solid fa-arrow-up text-green-700"></i>'
+                        : '<i class="fa-solid fa-arrow-down text-green-700"></i>';
                 }
             }
         }
@@ -1122,21 +1388,33 @@
                 
                 // Streak filter
                 if (state.hasStreak && !item.streak) return false;
+
+                // Playthrough filter
+                if (state.lowPlaythrough && item.playthrough > 1) return false;
                 
                 // Reset time filter
                 if (state.resetType === 'daily' && item.time.toLowerCase() !== 'daily') return false;
                 if (state.resetType === '24h' && !item.time.toLowerCase().includes('24')) return false;
 
-                // Churn method filter
-                if (state.selectedChurnMethods.length < CHURN_METHODS.length) {
+                // Churn method filter — inclusion mode: if any selected, casino must match at least one
+                if (state.selectedChurnMethods.length > 0) {
                     const c = item.churn.toLowerCase();
                     const match = state.selectedChurnMethods.some(method => {
-                        if (method === 'fast') return c.includes('fast') || c.includes('roulette');
-                        if (method === 'plinko') return c.includes('plinko');
-                        if (method === 'slow') return c.includes('slow');
+                        if (method === 'fastbj')       return c.includes('fast blackjack');
+                        if (method === 'anybj')        return c.includes('blackjack');
+                        if (method === 'fastroulette') return c.includes('fast roulette') || (c.includes('roulette') && !c.includes('slow roulette'));
+                        if (method === 'anyroulette')  return c.includes('roulette');
+                        if (method === 'plinko')       return c.includes('plinko');
+                        if (method === 'poker')        return c.includes('poker');
+                        if (method === 'sports')       return c.includes('sports');
                         return false;
                     });
                     if (!match) return false;
+                }
+
+                // Promo tier filter — inclusion mode
+                if (state.selectedPromoTiers.length > 0) {
+                    if (!item.promoTier || !state.selectedPromoTiers.includes(item.promoTier)) return false;
                 }
 
                 return true;
@@ -1165,27 +1443,35 @@
 
                     const signupFmt = item.signup > 0 ? `$${item.signup.toFixed(2)}` : "-";
                     const dailyFmt = item.daily > 0 ? `$${item.daily.toFixed(2)}` : "-";
+                    const isLongLoc = item.loc.length > 60;
+                    const locPadding = isLongLoc ? 'py-0.5' : 'py-2';
+                    const locClampClass = isLongLoc ? 'line-clamp-3 leading-tight' : 'line-clamp-2';
+                    const locClampData = isLongLoc ? 'line-clamp-3' : 'line-clamp-2';
 
                     row.innerHTML = `
-                        <td class="p-4 text-center">
+                        <td class="py-2 px-4 text-center">
                             <span style="${getTierBadgeStyle(item.tier)}" class="font-bold px-3 py-1 rounded-md shadow-sm text-xs">${item.tier}</span>
                         </td>
-                        <td class="p-4 font-semibold text-indigo-600">
-                            <a href="${item.link}" target="_blank" class="hover:underline flex items-center">
-                                ${item.name} <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs opacity-50"></i>
-                            </a>
+                        <td class="py-2 px-4 font-semibold text-indigo-600">
+                            <div class="flex items-center">
+                                <a href="${item.link}" target="_blank" class="hover:underline">
+                                    ${item.name}
+                                </a>
+                                ${item.verified ? '<i class="fa-solid fa-circle-check text-green-500 text-sm ml-1.5 flex-shrink-0" title="Verified"></i>' : ''}
+                            </div>
                         </td>
-                        <td class="p-4 font-bold text-slate-900 text-center">${signupFmt}</td>
-                        <td class="p-4 font-bold text-slate-900 text-center">${dailyFmt}</td>
-                        <td class="p-4 text-xs text-slate-500"><div class="line-clamp-2">${item.loc}</div></td>
-                        <td class="p-4 text-center">
+                        <td class="py-2 px-4 font-bold text-slate-900 text-center">${signupFmt}</td>
+                        <td class="py-2 px-4 font-bold text-slate-900 text-center">${dailyFmt}</td>
+                        <td class="${locPadding} px-4 text-xs text-slate-500"><div class="${locClampClass} loc-div" data-clamp="${locClampData}">${item.loc}</div></td>
+                        <td class="py-2 px-4 text-center">
                             ${item.streak
                                 ? '<i class="fa-solid fa-fire text-orange-500 text-lg" title="Streak Bonus"></i>'
                                 : '<span class="text-slate-300">-</span>'}
                         </td>
-                        <td class="p-4 text-center font-bold text-slate-900">${item.time}</td>
-                        <td class="p-4 text-center font-bold text-slate-900">$${item.min}</td>
-                        <td class="p-4 text-xs text-slate-600 max-w-xs select-none"
+                        <td class="py-2 px-4 text-center font-bold text-slate-900">${item.time}</td>
+                        <td class="py-2 px-4 text-center font-bold text-slate-900">$${item.min}</td>
+                        <td class="py-2 px-4 text-center font-bold text-slate-900">${item.playthrough}x</td>
+                        <td class="py-2 px-4 text-xs text-slate-600 max-w-xs select-none"
                             onmouseenter="showNoteTooltip(event, this)"
                             onmousemove="positionTooltip(event)"
                             onmouseleave="hideNoteTooltip()"
@@ -1213,11 +1499,15 @@
         }
 
         function toggleNote(row) {
-            const div = row.querySelector('[data-note] div');
-            if (div) {
-                div.classList.toggle('line-clamp-2');
-                hideNoteTooltip();
+            const noteDiv = row.querySelector('[data-note] div');
+            if (noteDiv) {
+                noteDiv.classList.toggle('line-clamp-2');
             }
+            const locDiv = row.querySelector('.loc-div');
+            if (locDiv) {
+                locDiv.classList.toggle(locDiv.dataset.clamp);
+            }
+            hideNoteTooltip();
         }
 
         function syncSliderMaxes() {
@@ -1227,7 +1517,18 @@
 
             signupSlider.max = maxSignupBonus;
             dailyAvgSlider.max = maxDailyAvg;
-            redeemSlider.max = maxMinRedeem;
+            const step = 5;
+            const roundedRedeemMax = Math.ceil(maxMinRedeem / step) * step;
+            redeemSlider.min = minMinRedeem;
+            redeemSlider.max = roundedRedeemMax;
+            redeemSlider.value = roundedRedeemMax;
+            state.maxMinRedeem = roundedRedeemMax;
+        }
+
+        function setRedeemDisplay(value) {
+            const sliderMax = parseFloat(document.getElementById('redeemSlider').max);
+            const el = document.getElementById('redeemDisplay');
+            el.textContent = parseFloat(value) >= sliderMax ? 'Any' : '$' + value;
         }
 
         function setupEventListeners() {
@@ -1275,6 +1576,14 @@
             positionTooltip(e);
         }
 
+        function showHeaderTooltip(e, th) {
+            const text = th.dataset.tip;
+            if (!text) return;
+            noteTooltip.textContent = text;
+            noteTooltip.style.display = 'block';
+            positionTooltip(e);
+        }
+
         function positionTooltip(e) {
             const offset = 14;
             let x = e.clientX + offset;
@@ -1289,6 +1598,21 @@
 
         function hideNoteTooltip() {
             noteTooltip.style.display = 'none';
+        }
+
+        // --- DARK MODE ---
+        function toggleDarkMode() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', isDark);
+            document.getElementById('darkIcon').className = isDark
+                ? 'fa-solid fa-sun text-lg'
+                : 'fa-solid fa-moon text-lg';
+        }
+
+        // Sync icon with stored preference on load
+        if (document.documentElement.classList.contains('dark')) {
+            const icon = document.getElementById('darkIcon');
+            if (icon) icon.className = 'fa-solid fa-sun text-lg';
         }
 
         // Start App
