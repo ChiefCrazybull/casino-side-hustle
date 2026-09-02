@@ -32,7 +32,12 @@ def read_csv(path):
 
 
 def write_csv(path, rows):
-    f = io.open(path, 'w', encoding='utf-8', newline='')
+    try:
+        f = io.open(path, 'w', encoding='utf-8', newline='')
+    except PermissionError:
+        sys.exit("Can't write %s - it's open in another program.
+"
+                 "Close it in Excel (Excel locks the file) and run this again." % os.path.basename(path))
     csv.writer(f, quoting=csv.QUOTE_MINIMAL).writerows(rows)
     f.close()
 
