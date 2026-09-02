@@ -1,1 +1,3 @@
 index-local.html
+__pycache__/
+*.pyc
