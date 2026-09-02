@@ -293,6 +293,30 @@
             background: #e9e9ee;
         }
 
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .note-headline {
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.35;
+            margin-bottom: 5px;
+        }
+
+        html.dark .note-headline { color: #e2e8f0; }
+
+        .tooltip-headline {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        html.dark .tooltip-headline { color: #f1f5f9; }
+
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -451,6 +475,7 @@
         @media (max-width: 767px) {
             .no-loc-row td[data-label="Location"] { display: none !important; }
             .no-loc-row td[data-label="Notes"] { grid-row: 5 !important; }
+            .no-loc-row td[data-label="Notes"] .line-clamp-1,
             .no-loc-row td[data-label="Notes"] .line-clamp-2 { -webkit-line-clamp: 4; }
             .no-loc-row td[data-label="Notes"] .note-text { -webkit-line-clamp: 4; }
         }
@@ -857,14 +882,14 @@
                                 onmouseleave="hideNoteTooltip()">
                                 Casino Name <span class="sort-icon ml-1" data-col="name"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-2 w-32 text-center sortable" onclick="handleSort('signup')"
+                            <th class="p-2 w-24 text-center sortable" onclick="handleSort('signup')"
                                 data-tip="The bonus given when you sign up for each casino."
                                 onmouseenter="showHeaderTooltip(event, this)"
                                 onmousemove="positionTooltip(event)"
                                 onmouseleave="hideNoteTooltip()">
                                 Sign Up <span class="sort-icon ml-1" data-col="signup"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-2 w-32 text-center sortable" onclick="handleSort('daily')"
+                            <th class="p-2 w-28 text-center sortable" onclick="handleSort('daily')"
                                 data-tip="The average amount you can expect to claim from each casino every day. Sometimes part of these daily bonuses comes from giveaways on the casino's social media accounts, which I note in the Notes section."
                                 onmouseenter="showHeaderTooltip(event, this)"
                                 onmousemove="positionTooltip(event)"
@@ -906,7 +931,7 @@
                                 onmouseleave="hideNoteTooltip()">
                                 Playthru <span class="sort-icon ml-1" data-col="playthrough"><i class="fa-solid fa-sort text-slate-300"></i></span>
                             </th>
-                            <th class="p-2 w-64 text-center"
+                            <th class="p-2 w-80 text-center"
                                 data-tip="My thoughts and helpful tips for each casino, based on my experience."
                                 onmouseenter="showHeaderTooltip(event, this)"
                                 onmousemove="positionTooltip(event)"
@@ -1145,6 +1170,8 @@
 
             // Find each column index by name
             const iLink     = col('link');
+            const iRank     = col('rank');
+            const iHeadline = col('headline');
             const iTier     = col('tier');
             const iName     = col('casino name');
             const iSignup   = col('signup');
@@ -1194,7 +1221,12 @@
                 const verifiedRaw = (cols[iVerified] || '').toLowerCase();
                 const verified = verifiedRaw === 'yes' || verifiedRaw === 'true' || verifiedRaw === '1';
 
+                // Rank drives the default table order. Blank/unparseable ranks sort last.
+                const rankRaw = parseFloat((cols[iRank] || '').replace(/[^0-9.\-]/g, ''));
+
                 return {
+                    rank:     Number.isFinite(rankRaw) ? rankRaw : Infinity,
+                    headline: (cols[iHeadline] || '').trim(),
                     tier:     (cols[iTier]  || '').trim(),
                     name:     name,
                     link:     link,
@@ -1214,6 +1246,47 @@
             }).filter(row => row.tier && row.name);
         }
 
+        // --- WHERE THE DATA COMES FROM ---
+        // Served from localhost: prefer local-data.csv sitting next to this file, so
+        // editing that CSV and refreshing shows changes immediately (no rebuild step).
+        // Anywhere else -- and if local-data.csv isn't there -- use the live sheet.
+        function isLocalHost() {
+            return ['localhost', '127.0.0.1', '::1', ''].includes(location.hostname)
+                && location.protocol !== 'file:';
+        }
+
+        function showDevBanner(text) {
+            if (document.getElementById('devBanner')) return;
+            const b = document.createElement('div');
+            b.id = 'devBanner';
+            b.style.cssText = 'background:#b45309;color:#fff;font:600 13px/1.4 Inter,system-ui,sans-serif;'
+                            + 'padding:8px 16px;text-align:center;letter-spacing:.01em;';
+            b.textContent = text;
+            document.body.insertBefore(b, document.body.firstChild);
+        }
+
+        async function loadSheetCsv() {
+            if (isLocalHost()) {
+                try {
+                    const r = await fetch(`local-data.csv?_=${Date.now()}`);
+                    if (r.ok) {
+                        const text = await r.text();
+                        if (text.trim()) {
+                            showDevBanner('LOCAL DEV — reading local-data.csv, not the live sheet. '
+                                        + 'Edit that file and refresh to see changes.');
+                            return text;
+                        }
+                    }
+                } catch (e) {
+                    // local-data.csv missing or unreadable -> fall through to the live sheet
+                }
+            }
+            const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vShE116l54ijfP1yQXXXgjnpK0ApBAhECrvztVYaTZF2-aH35tI-vl2S4VwB7XPpM5vgvL_-74U15xl/pub?gid=333041365&single=true&output=csv&_=${Date.now()}`;
+            const response = await fetch(SHEET_CSV_URL);
+            if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+            return await response.text();
+        }
+
         // --- LOAD DATA FROM SHEET THEN INIT ---
         async function loadAndInit() {
             document.getElementById('tableBody').innerHTML = `
@@ -1225,12 +1298,7 @@
                 </tr>`;
 
             try {
-                const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vShE116l54ijfP1yQXXXgjnpK0ApBAhECrvztVYaTZF2-aH35tI-vl2S4VwB7XPpM5vgvL_-74U15xl/pub?gid=333041365&single=true&output=csv&_=${Date.now()}`;
-
-                const response = await fetch(SHEET_CSV_URL);
-                if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
-
-                const csvText = await response.text();
+                const csvText = await loadSheetCsv();
                 localData = parseCSV(csvText);
 
                 if (localData.length === 0) throw new Error("No data rows found in sheet.");
@@ -1241,6 +1309,9 @@
                         <td colspan="10" class="p-12 text-center text-red-400">
                             <i class="fa-solid fa-triangle-exclamation text-2xl mb-3 block"></i>
                             Failed to load data. Make sure the sheet is published publicly.<br>
+                            ${location.protocol === 'file:'
+                                ? '<span class="text-xs text-slate-500 mt-2 block">Opened directly from disk &mdash; the browser blocks the sheet request. Run <b>start-dev.bat</b> and use http://localhost:8080 instead.</span>'
+                                : ''}
                             <span class="text-xs text-slate-400 mt-2 block">${err.message}</span>
                         </td>
                     </tr>`;
@@ -1283,6 +1354,11 @@
 
         // --- INIT ---
         function init() {
+
+            // Default table order: ascending by the sheet's Rank column (1.1, 1.2, 1.3, ...).
+            // Ties and blank ranks keep their original sheet row order.
+            localData.forEach((row, i) => { row._sheetRow = i; });
+            localData.sort((a, b) => (a.rank - b.rank) || (a._sheetRow - b._sheetRow));
 
             // Compute mins/maxes from actual loaded data
             maxSignupBonus = Math.max(...localData.map(item => item.signup));
@@ -1712,6 +1788,10 @@
 
                     const signupFmt = item.signup > 0 ? `$${item.signup.toFixed(2)}` : "-";
                     const dailyFmt = item.daily > 0 ? `$${item.daily.toFixed(2)}` : "-";
+                    // Whole dollars stay clean ($100); cents always show both digits ($99.50).
+                    const minFmt = `$${Number.isInteger(item.min) ? item.min : item.min.toFixed(2)}`;
+                    // With a headline above it the note shows one line; without, keep the old two.
+                    const noteClamp = item.headline ? 'line-clamp-1' : 'line-clamp-2';
                     const isLongLoc = item.loc.length > 60;
                     const locPadding = isLongLoc ? 'py-0.5' : 'py-2';
                     const locClampClass = isLongLoc ? 'line-clamp-3 leading-tight' : 'line-clamp-2';
@@ -1739,16 +1819,18 @@
                                 : '<span class="text-slate-300">-</span>'}
                         </td>
                         <td class="py-2 px-4 text-center font-bold text-slate-900" data-label="Reset">${infoLabel('Reset')}${item.time}</td>
-                        <td class="py-2 px-4 text-center font-bold text-slate-900" data-label="Min Redeem">${infoLabel('Min Redeem')}$${item.min}</td>
+                        <td class="py-2 px-4 text-center font-bold text-slate-900" data-label="Min Redeem">${infoLabel('Min Redeem')}${minFmt}</td>
                         <td class="py-2 px-4 text-center font-bold text-slate-900" data-label="Playthru">${infoLabel('Playthru')}${item.playthrough}x</td>
-                        <td class="py-2 px-4 text-xs text-slate-600 max-w-xs select-none"
+                        <td class="py-2 px-4 text-xs text-slate-600 max-w-sm select-none"
                             onmouseenter="showNoteTooltip(event, this)"
                             onmousemove="positionTooltip(event)"
                             onmouseleave="hideNoteTooltip()"
                             data-note="${item.note.replace(/"/g, '&quot;')}"
+                            data-headline="${item.headline.replace(/"/g, '&quot;')}"
                             data-label="Notes">
                             ${infoLabel('Notes')}
-                            <div class="line-clamp-2 note-text">${item.note}</div>
+                            ${item.headline ? `<div class="note-headline">${item.headline}</div>` : ''}
+                            <div class="${noteClamp} note-text" data-clamp="${noteClamp}">${item.note}</div>
                         </td>
                     `;
                     tableBody.appendChild(row);
@@ -1773,7 +1855,7 @@
         function toggleNote(row) {
             const noteDiv = row.querySelector('.note-text');
             if (noteDiv) {
-                noteDiv.classList.toggle('line-clamp-2');
+                noteDiv.classList.toggle(noteDiv.dataset.clamp || 'line-clamp-2');
             }
             const locDiv = row.querySelector('.loc-div');
             if (locDiv) {
@@ -1858,11 +1940,23 @@
 
         function showNoteTooltip(e, td) {
             if ('ontouchstart' in window) return;
-            const div = td.querySelector('.line-clamp-2');
-            if (!div || !div.classList.contains('line-clamp-2')) return;
+            const div = td.querySelector('.note-text');
+            if (!div || !div.classList.contains(div.dataset.clamp || 'line-clamp-2')) return;
             const text = td.dataset.note;
-            if (!text) return;
-            noteTooltip.textContent = text;
+            const head = td.dataset.headline;
+            if (!text && !head) return;
+            noteTooltip.textContent = '';
+            if (head) {
+                const h = document.createElement('div');
+                h.className = 'tooltip-headline';
+                h.textContent = head;
+                noteTooltip.appendChild(h);
+            }
+            if (text) {
+                const b = document.createElement('div');
+                b.textContent = text;
+                noteTooltip.appendChild(b);
+            }
             noteTooltip.style.display = 'block';
             positionTooltip(e);
         }
